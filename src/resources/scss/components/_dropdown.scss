@@ -1,0 +1,157 @@
+@use "../abstracts";
+.dropdown {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: min(1240px, 100%);
+    padding-top: 54px;
+    @include abstracts.screen(lg) {
+        position: initial;
+        padding-top: 0;
+    }
+    &__inner {
+        --inner-padding: 30px;
+        position: relative;
+        padding: var(--inner-padding);
+        border-radius: 20px;
+        background: var(--dropdown-bg-color);
+        box-shadow: 0px 40px 90px 20px var(--dropdown-shadow-color);
+
+        &::before {
+            content: url("../icons/dropdown-arrow.svg");
+            position: absolute;
+            top: -13px;
+            left: var(--arrow-left-pos);
+            translate: -50%;
+            filter: var(--dropdown-bg-before-color);
+        }
+        @include abstracts.screen(lg) {
+            padding: 0 40px;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            &::before {
+                content: none;
+            }
+        }
+    }
+}
+
+.top-menu {
+    --top-menu-width: 292px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+
+    &__main {
+        width: var(--top-menu-width);
+        max-height: calc(min(582px, 100vh - 135px) - 2 * var(--inner-padding));
+        overflow-y: auto;
+        &:first-child {
+            border-right: 1px solid var(--top-menu-border-color);
+        }
+        @include abstracts.screen(lg) {
+            width: 100%;
+            max-height: initial;
+            height: auto;
+            &:first-child {
+                border-right: none;
+            }
+        }
+    }
+}
+
+.menu-column {
+    padding-bottom: 20px;
+    display: flex;
+    gap: 14px;
+    &--icon {
+        @include abstracts.screen(xl) {
+            display: none;
+        }
+        @include abstracts.screen(lg) {
+            display: block;
+        }
+        position: relative;
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+    }
+    &--content {
+        flex: 1;
+    }
+    &__icon-1 {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+    }
+    &__icon-2 {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 24px;
+        height: 24px;
+        object-fit: cover;
+    }
+    &__heading {
+        margin-top: 4px;
+        font-size: 1.6rem;
+        font-weight: 500;
+        line-height: 150%;
+    }
+    &__list {
+        margin-top: 19px;
+        @include abstracts.screen(lg) {
+            margin-top: 0;
+        }
+    }
+
+    &__link {
+        display: block;
+        padding: 7px 0;
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 142.857%;
+        &:hover {
+            color: #0071dc;
+            font-weight: 500;
+        }
+    }
+
+    &__item--active > &__link,
+    &__item:hover > &__link {
+        color: #0071dc;
+        font-weight: 500;
+    }
+
+    &__item {
+        &--active .sub-menu {
+            display: flex;
+        }
+    }
+    &__item:hover .sub-menu {
+        display: flex;
+    }
+}
+.sub-menu {
+    position: absolute;
+    display: none;
+    justify-content: space-between;
+    inset: 0 0 0 var(--top-menu-width);
+    overflow-y: auto;
+    @include abstracts.screen(lg) {
+        position: initial;
+        flex-direction: column;
+    }
+    &--not-main {
+        position: initial;
+        inset: initial;
+        display: flex;
+        flex: 1;
+        max-height: calc(min(582px, 100vh - 135px) - 2 * var(--inner-padding));
+        @include abstracts.screen(lg) {
+            max-height: initial;
+            height: auto;
+        }
+    }
+}
