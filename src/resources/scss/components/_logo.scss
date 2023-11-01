@@ -20,7 +20,7 @@
     }
 
     &__img {
-        border-radius: 12px;
+        border-radius: 15px;
         @include abstracts.screen(lg) {
             width: 24px;
         }
