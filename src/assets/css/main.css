@@ -195,7 +195,7 @@ section {
 
 .container-fluid, .container {
   --grid-gutter-x: 30px;
-  --grid-gutter-y: 0;
+  --grid-gutter-y: 30px;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -1675,6 +1675,9 @@ footer {
     font-size: 1.8rem;
     line-height: 144.444%;
   }
+}
+.logo__img {
+  border-radius: 25px;
 }
 @media (max-width: 991.98px) {
   .logo__img {

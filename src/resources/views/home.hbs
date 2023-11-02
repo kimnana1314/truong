@@ -1,1 +1,210 @@
-<h1>home page</h1>
+<div class="container home">
+    <!-- Slideshow -->
+    <div class="home__container">
+        <div class="slideshow">
+            <div class="slideshow__inner">
+                <div class="slideshow__item">
+                    <a href="#!" class="slideshow__link">
+                        <picture>
+                            <source
+                                media="(max-width: 767.98px)"
+                                srcset="./img/slideshow/item-1-md.png"
+                            />
+                            <img
+                                src="./img/slideshow/item-1.png"
+                                alt=""
+                                class="slideshow__img"
+                            />
+                        </picture>
+                    </a>
+                </div>
+            </div>
+            <div class="slideshow__page">
+                <span class="slideshow__num">1</span>
+                <span class="slideshow__slider"></span>
+                <span class="slideshow__num">5</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Browse Products -->
+    <section class="home__container">
+        <div class="home__row">
+            <h2 class="home__heading">Sản phẩm</h2>
+        </div>
+        <div class="home__product">
+            <div
+                class="row row-cols-4 row-cols-lg-2 row-cols-sm-1 g-lg-3 g-md-2"
+            >
+                <!-- Procedure card 1 -->
+                {{#each Items}}
+                    <div class="col">
+                        <article class="product-card">
+                            <div class="product-card__img-wrap">
+                                <a href="#!">
+                                    <img
+                                        src="{{this.Img}}"
+                                        alt=""
+                                        class="product-card__thumb"
+                                    />
+                                </a>
+                                <button
+                                    class="like-btn like-btn--liked product-card__like-btn"
+                                >
+                                    <img
+                                        src="./icons/heart.svg"
+                                        alt=""
+                                        class="like-btn__icon icon"
+                                    />
+                                    <img
+                                        src="./icons/heart_red.svg"
+                                        alt=""
+                                        class="like-btn__icon--liked"
+                                    />
+                                </button>
+                            </div>
+                            <h3 class="product-card__title">
+                                <a href="!">{{this.Item_Name}}</a>
+                            </h3>
+                            <span class="product-card__brand">Công suất:
+                                {{this.Wattage}}</span>
+                            <div class="product-card__row">
+                                <span class="product-card__price">{{this.Price}}
+                                </span>
+                                <img
+                                    src="./icons/star.svg"
+                                    alt=""
+                                    class="product-card__star"
+                                />
+                                <span
+                                    class="product-card__score"
+                                >{{this.Star}}</span>
+                            </div>
+                        </article>
+                    </div>
+                {{/each}}
+                {{! <!-- Procedure card 2 -->
+                <div class="col">
+                    <article class="product-card">
+                        <div class="product-card__img-wrap">
+                            <a href="#!">
+                                <img
+                                    src="./img/proceduct/item-proceduct-2.png"
+                                    alt=""
+                                    class="product-card__thumb"
+                                />
+                            </a>
+                            <button class="like-btn product-card__like-btn">
+                                <img
+                                    src="./icons/heart.svg"
+                                    alt=""
+                                    class="like-btn__icon icon"
+                                />
+                                <img
+                                    src="./icons/heart_red.svg"
+                                    alt=""
+                                    class="like-btn__icon--liked"
+                                />
+                            </button>
+                        </div>
+                        <h3 class="product-card__title">
+                            <a href="!">
+                                Lavazza Coffee Blends - Try the Italian Espresso</a>
+                        </h3>
+                        <span class="product-card__brand">Lavazza</span>
+                        <div class="product-card__row">
+                            <span class="product-card__price">$53.00</span>
+                            <img
+                                src="./icons/star.svg"
+                                alt=""
+                                class="product-card__star"
+                            />
+                            <span class="product-card__score">3.1</span>
+                        </div>
+                    </article>
+                </div>
+                <!-- Procedure card 3 -->
+                <div class="col">
+                    <article class="product-card">
+                        <div class="product-card__img-wrap">
+                            <a href="#!">
+                                <img
+                                    src="./img/proceduct/item-proceduct-3.png"
+                                    alt=""
+                                    class="product-card__thumb"
+                                />
+                            </a>
+                            <button class="like-btn product-card__like-btn">
+                                <img
+                                    src="./icons/heart.svg"
+                                    alt=""
+                                    class="like-btn__icon icon"
+                                />
+                                <img
+                                    src="./icons/heart_red.svg"
+                                    alt=""
+                                    class="like-btn__icon--liked"
+                                />
+                            </button>
+                        </div>
+                        <h3 class="product-card__title">
+                            <a href="!">Lavazza - Caffè Espresso Black Tin -
+                                Ground coffee</a>
+                        </h3>
+                        <span class="product-card__brand">welikecoffee</span>
+                        <div class="product-card__row">
+                            <span class="product-card__price">$99.99</span>
+                            <img
+                                src="./icons/star.svg"
+                                alt=""
+                                class="product-card__star"
+                            />
+                            <span class="product-card__score">5.0</span>
+                        </div>
+                    </article>
+                </div>
+                <!-- Procedure card 4 -->
+                <div class="col">
+                    <article class="product-card">
+                        <div class="product-card__img-wrap">
+                            <a href="#!">
+                                <img
+                                    src="./img/proceduct/item-proceduct-4.png"
+                                    alt=""
+                                    class="product-card__thumb"
+                                />
+                            </a>
+                            <button class="like-btn product-card__like-btn">
+                                <img
+                                    src="./icons/heart.svg"
+                                    alt=""
+                                    class="like-btn__icon icon"
+                                />
+                                <img
+                                    src="./icons/heart_red.svg"
+                                    alt=""
+                                    class="like-btn__icon--liked"
+                                />
+                            </button>
+                        </div>
+                        <h3 class="product-card__title">
+                            <a href="!">
+                                Qualità Oro Mountain Grown - Espresso Coffee
+                                Beans</a>
+                        </h3>
+                        <span class="product-card__brand">Lavazza</span>
+                        <div class="product-card__row">
+                            <span class="product-card__price">$38.5</span>
+                            <img
+                                src="./icons/star.svg"
+                                alt=""
+                                class="product-card__star"
+                            />
+                            <span class="product-card__score">4.4</span>
+                        </div>
+                    </article>
+                </div> }}
+            </div>
+        </div>
+    </section>
+</div>

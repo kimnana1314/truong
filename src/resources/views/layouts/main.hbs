@@ -12,17 +12,22 @@
         <meta name="theme-color" content="#ffffff">
 
  <!-- font -->
-        <link rel="stylesheet" href="./css/font/stylesheet.css" />
+        <link rel="stylesheet" href="./font/stylesheet.css" />
         <link rel="stylesheet" href="./css/main.css" />
         <script src="./js/scripts.js"></script>
     </head>
     <body>
-        <div class="app">
-            {{> header}}
+        <header id="header" class="header">
+           {{> header}}
+        </header>
+           
             <div class="container">
                 {{{body}}}
             </div>
-            {{> footer}}
+            <footer class="footer" id ="footer">
+               {{> footer}}
+            </footer>
+            
         </div>
 
     </body>

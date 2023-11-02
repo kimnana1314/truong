@@ -20,6 +20,7 @@
     }
     &__cate {
         --grid-gutter-x: 51px;
+
         @include abstracts.screen(md) {
             --grid-gutter-y: 20px;
         }
