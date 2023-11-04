@@ -1,10 +1,8 @@
-const newsRouter = require("./news");
 const homeRouter = require("./home");
+const dangnhapRouter = require("./dangnhap");
 
 function route(app) {
-    app.use("/news", newsRouter);
-}
-function route(app) {
+    app.use("/dangnhap", dangnhapRouter);
     app.use("/", homeRouter);
 }
 
