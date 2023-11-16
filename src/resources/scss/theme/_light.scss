@@ -1,8 +1,8 @@
 @use "../abstracts";
 html {
     --text-color: #1a162e;
-    --icon-color: brightness(0) saturate(100%) invert(7%) sepia(19%) saturate(2422%) hue-rotate(214deg) brightness(98%)
-        contrast(95%);
+    --icon-color: brightness(0) saturate(100%) invert(7%) sepia(19%)
+        saturate(2422%) hue-rotate(214deg) brightness(98%) contrast(95%);
     --body-bg: #f6f6f6;
     --header-bg-color: #eee;
     --top-act-group-bg-color: #fff;
@@ -17,8 +17,9 @@ html {
     --dropdown-bg-color: #fff;
     --dropdown-shadow-color: rgba(200, 200, 200, 0.4);
 
-    --dropdown-bg-before-color: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(88deg)
-        brightness(104%) contrast(102%);
+    --dropdown-bg-before-color: brightness(0) saturate(100%) invert(100%)
+        sepia(100%) saturate(0%) hue-rotate(88deg) brightness(104%)
+        contrast(102%);
     --top-menu-border-color: #d2d1d6;
     // Sidebar
     --sidebar-bg: #fff;
@@ -42,10 +43,12 @@ html {
     --filter-form-bg: #fff;
     --filter-form-shadow: rgba(200, 200, 200, 0.4);
     --filter-heading: #1a162e;
-    --filter-arrow-bg: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(88deg)
-        brightness(104%) contrast(102%);
+    --filter-arrow-bg: brightness(0) saturate(100%) invert(100%) sepia(100%)
+        saturate(0%) hue-rotate(88deg) brightness(104%) contrast(102%);
     // sign-up
     --sign-up-intro-bg: #fafafd;
     --sign-up-content-bg: #fff;
     --form-text-input: #d2d1d6;
+
+    --bg_product: #ededf6;
 }

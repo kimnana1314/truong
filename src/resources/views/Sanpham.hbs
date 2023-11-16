@@ -1,0 +1,131 @@
+<div class="product-container">
+    {{#each Items}}
+        <div class="row">
+            <div class="col-6">
+                <div class="prod-preview">
+
+                    <div class="prod-preview__thumb">
+                        <img
+                            id="preview_img"
+                            src="{{this.Img}}"
+                            alt=""
+                            class="prod-preview__img"
+                        />
+                    </div>
+                    <div class="prod-preview__list">
+                        <img
+                            id="preview_img1"
+                            src="{{this.Img}}"
+                            alt=""
+                            class="prod-preview__list-img prod-preview__list--current"
+                        />
+                        <img
+                            id="preview_img2"
+                            src="{{this.Img1}}"
+                            alt=""
+                            class="prod-preview__list-img"
+                        />
+                        <img
+                            id="preview_img3"
+                            src="{{this.Img2}}"
+                            alt=""
+                            class="prod-preview__list-img"
+                        />
+                        <img
+                            id="preview_img4"
+                            src="{{this.Img3}}"
+                            alt=""
+                            class="prod-preview__list-img"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <section class="prod-info">
+                    <h1 class="prod-info__heading">{{this.Item_Name}}</h1>
+                    <div class="row">
+                        <div class="prod-info__list">
+                            <table id="product">
+                                <tr>
+                                    <td class="table_product_b">Kích thước</td>
+                                    <td>{{this.Size_M}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table_product_b">Trọng lượng máy</td>
+                                    <td>{{this.Weigth_M}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table_product_b">Siza đá</td>
+                                    <td>{{this.Size_D}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table_product_b">Sản lượng</td>
+                                    <td>{{this.Quantity}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table_product_b">Thể tích thùng
+                                        chứa</td>
+                                    <td>{{this.Container_Valume}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table_product_b">Điện áp</td>
+                                    <td>{{this.Voltage}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table_product_b">Công suất</td>
+                                    <td>{{this.Wattage}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table_product_b">Chất làm lạnh</td>
+                                    <td>{{this.Cryogenics}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table_product_b">Hệ thống làm
+                                        lạnh</td>
+                                    <td>{{this.Cooling_Sys}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="table_product_b">Số viên đá/mẻ</td>
+                                    <td>{{this.Qty_Batch}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="prod-act">
+                        <div class="product-card__row">
+                            <h2 class="prod-act__price">{{this.Price}}</h2>
+                            <img
+                                src="./icons/star.svg"
+                                alt=""
+                                class="product-card__star"
+                            />
+                            <span
+                                class="product-card__score"
+                            >{{this.Star}}</span>
+                        </div>
+
+                        <div class="prod-act__btn">
+                            <button class="btn btn--primary">Thêm vào giỏ hàng</button>
+                            <button class="btn btn--outline" id="btn_love">
+                                <img
+                                    id="prod_imb_cb"
+                                    src="{{this.img_Icon}}"
+                                    alt=""
+                                    class="{{this.img_Icon_Class}}"
+                                />
+                            </button>
+
+                            <input
+                                hidden
+                                type="checkbox"
+                                checked="{{this.love}}"
+                                id="img_checkbox"
+                                name="vehicle1"
+                            />
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    {{/each}}
+</div>

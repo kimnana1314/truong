@@ -1,0 +1,62 @@
+<main class="auth">
+    <div class="auth__content">
+        <div class="auth__content-inner">
+            <a href="/" class="logo">
+                <img
+                    src="./icons/logo.svg"
+                    alt="Máy làm đá"
+                    class="logo__img"
+                />
+                <h1 class="logo__title">MÁY LÀM ĐÁ</h1>
+            </a>
+            <h1 class="auth__heading">Kích hoạt tài khoản</h1>
+            <p class="auth__desc">Hãy điền mã code mà chúng tôi gửi vào mail cho
+                bạn vào ô dưới
+            </p>
+            <form action="" class="form auth__form" id="Frm_Active">
+                        <div class="form__group">
+                    <div class="form__text-input" style="display: none;">
+                        <input
+                            type="text"
+                            name="User_Id"
+                            value="{{this.key}}"
+                            id="User_Id"
+                            placeholder=" "
+                            class="form__input"
+                            
+                        />
+
+                    </div>
+
+                <div class="form__group">
+                    <div class="form__text-input">
+                        <input
+                            type="text"
+                            name="Code"
+                            id="Code"
+                            placeholder="Nhập mã code"
+                            class="form__input"
+                            required
+                        />
+
+                    </div>
+                    <p class="form__error" id="err_email">Phải nhập mã code</p>
+                </div>
+
+                <div class="form__group form__group--inline">
+                    <p class="form__mess form__mess--err" id="output">
+                    </p>
+                </div>
+                <div class="form__group auth__btn-group">
+                    <button
+                        type="submit"
+                        id="btnAcitive"
+                        class="btn btn--primary form__submit-btn"
+                    >Xác thực tài khoản</button>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</main>

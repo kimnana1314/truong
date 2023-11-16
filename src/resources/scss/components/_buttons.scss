@@ -21,12 +21,6 @@
     &__icon--liked {
         margin-top: 10px;
     }
-    &:not(&--liked) .like-btn__icon--liked {
-        display: none;
-    }
-    &--liked .like-btn__icon {
-        display: none;
-    }
 }
 
 .btn {

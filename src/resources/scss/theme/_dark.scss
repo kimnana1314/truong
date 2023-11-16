@@ -1,8 +1,8 @@
 @use "../abstracts";
 html.dark {
     --text-color: #fff;
-    --icon-color: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(235deg) brightness(108%)
-        contrast(101%);
+    --icon-color: brightness(0) saturate(100%) invert(100%) sepia(0%)
+        saturate(0%) hue-rotate(235deg) brightness(108%) contrast(101%);
     --body-bg: #292e39;
     --header-bg-color: #171c28;
     --top-act-group-bg-color: #292e39;
@@ -11,8 +11,9 @@ html.dark {
     //dropdown
     --dropdown-bg-color: #171c28;
     --dropdown-shadow-color: rgba(23, 28, 40, 0.4);
-    --dropdown-bg-before-color: brightness(0) saturate(100%) invert(7%) sepia(22%) saturate(1230%) hue-rotate(184deg)
-        brightness(95%) contrast(91%);
+    --dropdown-bg-before-color: brightness(0) saturate(100%) invert(7%)
+        sepia(22%) saturate(1230%) hue-rotate(184deg) brightness(95%)
+        contrast(91%);
     @include abstracts.screen(lg) {
         --header-shadow-color: rgba(0, 0, 0, 0.2);
     }
@@ -42,10 +43,12 @@ html.dark {
     --filter-form-shadow: rgba(0, 0, 0, 0.4);
     --filter-heading: #fff;
     --filter-tag-bg: #171c28;
-    --filter-arrow-bg: brightness(0) saturate(100%) invert(16%) sepia(20%) saturate(561%) hue-rotate(183deg)
-        brightness(92%) contrast(92%);
+    --filter-arrow-bg: brightness(0) saturate(100%) invert(16%) sepia(20%)
+        saturate(561%) hue-rotate(183deg) brightness(92%) contrast(92%);
     // sign-up
     --sign-up-intro-bg: #171c28;
     --sign-up-content-bg: #292e39;
     --form-text-input: #b9babe;
+
+    --bg_product: #171c28;
 }

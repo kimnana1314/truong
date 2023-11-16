@@ -1,8 +1,10 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const dbConfig = {
-    user: "Tr_App",
-    password: "TrGGGGHd1314@",
-    server: "103.101.161.215",
-    database: "App_Truong",
+    user: process.env.USER,
+    password: process.env.PASSWORD,
+    server: process.env.SERVER,
+    database: process.env.DATABASE,
     options: {
         encrypt: false,
         trustServerCertificate: true,

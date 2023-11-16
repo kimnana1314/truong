@@ -1322,8 +1322,8 @@ section {
 }
 html {
   --text-color: #1a162e;
-  --icon-color: brightness(0) saturate(100%) invert(7%) sepia(19%) saturate(2422%) hue-rotate(214deg) brightness(98%)
-      contrast(95%);
+  --icon-color: brightness(0) saturate(100%) invert(7%) sepia(19%)
+      saturate(2422%) hue-rotate(214deg) brightness(98%) contrast(95%);
   --body-bg: #f6f6f6;
   --header-bg-color: #eee;
   --top-act-group-bg-color: #fff;
@@ -1331,8 +1331,9 @@ html {
   --top-act_group-separate: #ededf6;
   --dropdown-bg-color: #fff;
   --dropdown-shadow-color: rgba(200, 200, 200, 0.4);
-  --dropdown-bg-before-color: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(88deg)
-      brightness(104%) contrast(102%);
+  --dropdown-bg-before-color: brightness(0) saturate(100%) invert(100%)
+      sepia(100%) saturate(0%) hue-rotate(88deg) brightness(104%)
+      contrast(102%);
   --top-menu-border-color: #d2d1d6;
   --sidebar-bg: #fff;
   --sidebar--shadow-color: rgba(200, 200, 200, 0.4);
@@ -1350,11 +1351,12 @@ html {
   --filter-form-bg: #fff;
   --filter-form-shadow: rgba(200, 200, 200, 0.4);
   --filter-heading: #1a162e;
-  --filter-arrow-bg: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(88deg)
-      brightness(104%) contrast(102%);
+  --filter-arrow-bg: brightness(0) saturate(100%) invert(100%) sepia(100%)
+      saturate(0%) hue-rotate(88deg) brightness(104%) contrast(102%);
   --sign-up-intro-bg: #fafafd;
   --sign-up-content-bg: #fff;
   --form-text-input: #d2d1d6;
+  --bg_product: #ededf6;
 }
 @media (max-width: 991.98px) {
   html {
@@ -1365,8 +1367,8 @@ html {
 
 html.dark {
   --text-color: #fff;
-  --icon-color: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(235deg) brightness(108%)
-      contrast(101%);
+  --icon-color: brightness(0) saturate(100%) invert(100%) sepia(0%)
+      saturate(0%) hue-rotate(235deg) brightness(108%) contrast(101%);
   --body-bg: #292e39;
   --header-bg-color: #171c28;
   --top-act-group-bg-color: #292e39;
@@ -1374,8 +1376,9 @@ html.dark {
   --top-act_group-separate: #ededf6;
   --dropdown-bg-color: #171c28;
   --dropdown-shadow-color: rgba(23, 28, 40, 0.4);
-  --dropdown-bg-before-color: brightness(0) saturate(100%) invert(7%) sepia(22%) saturate(1230%) hue-rotate(184deg)
-      brightness(95%) contrast(91%);
+  --dropdown-bg-before-color: brightness(0) saturate(100%) invert(7%)
+      sepia(22%) saturate(1230%) hue-rotate(184deg) brightness(95%)
+      contrast(91%);
   --top-menu-border-color: #171c28;
   --sidebar-bg: #292e39;
   --sidebar--shadow-color: rgba(23, 28, 40, 0.4);
@@ -1394,11 +1397,12 @@ html.dark {
   --filter-form-shadow: rgba(0, 0, 0, 0.4);
   --filter-heading: #fff;
   --filter-tag-bg: #171c28;
-  --filter-arrow-bg: brightness(0) saturate(100%) invert(16%) sepia(20%) saturate(561%) hue-rotate(183deg)
-      brightness(92%) contrast(92%);
+  --filter-arrow-bg: brightness(0) saturate(100%) invert(16%) sepia(20%)
+      saturate(561%) hue-rotate(183deg) brightness(92%) contrast(92%);
   --sign-up-intro-bg: #171c28;
   --sign-up-content-bg: #292e39;
   --form-text-input: #b9babe;
+  --bg_product: #171c28;
 }
 @media (max-width: 991.98px) {
   html.dark {
@@ -2011,12 +2015,6 @@ footer {
 .like-btn__icon--liked {
   margin-top: 10px;
 }
-.like-btn:not(.like-btn--liked) .like-btn__icon--liked {
-  display: none;
-}
-.like-btn--liked .like-btn__icon {
-  display: none;
-}
 
 .btn {
   display: flex;
@@ -2327,8 +2325,9 @@ footer {
 }
 .form__group--inline {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
 }
 .form__group:has(:invalid):has(.form__input:not(:placeholder-shown)) .form__text-input {
   border-color: #f94545;
@@ -2340,6 +2339,16 @@ footer {
 }
 .form__group:has(:invalid):has(.form__input:not(:placeholder-shown)) .form__input-icon {
   display: none;
+}
+.form__mess {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #5cb85c;
+}
+.form__mess--err {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #f94545;
 }
 .form__error {
   margin-top: 10px;
@@ -2413,6 +2422,129 @@ footer {
   rotate: -45deg;
   left: 2px;
   top: 5px;
+}
+
+.product-container {
+  margin: 30px;
+}
+
+.prod-preview__thumb {
+  position: relative;
+  flex-shrink: 0;
+  padding-top: 92%;
+  width: 100%;
+}
+.prod-preview__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.prod-preview__list-img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  border: 1.5px solid rgba(158, 157, 168, 0.3);
+  border-radius: 8px;
+  opacity: 0.9;
+  transition: opacity, border-color;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+.prod-preview__list-img:hover {
+  border-color: #9e9da8;
+}
+.prod-preview__list {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.prod-preview__list--current {
+  opacity: 1;
+  border-color: #ffb700;
+}
+
+.prod-info {
+  padding: 30px;
+  background-color: var(--bg_product);
+  border-radius: 6px;
+}
+.prod-info__heading {
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 138.426%;
+}
+.prod-info__list {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: space-between;
+}
+.prod-info__list_tile {
+  font-size: 1.8rem;
+  font-weight: 550;
+  line-height: 125%;
+}
+.prod-info__list_desc {
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 125%;
+}
+.prod-info__list--item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+#product {
+  border-collapse: collapse;
+  width: 100%;
+  user-select: none;
+}
+
+#product td,
+#product th {
+  border: none;
+  padding: 8px;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+#product td.table_product_b {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+#product tr:nth-child(odd) {
+  background-color: #77dae6;
+}
+
+.prod-act {
+  margin-top: 20px;
+  padding: 30px;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #b9babe;
+}
+.prod-act__btn {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.prod-act__price {
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 138.462%;
+}
+.prod-act__icon-imge {
+  width: 40px;
+  height: 38px;
 }
 
 .home__container {
