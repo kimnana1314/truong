@@ -3,24 +3,19 @@ const dangnhapRouter = require("./dangnhap");
 const activeRouter = require("./active");
 const dangkyRouter = require("./dangky");
 const sanphamRouter = require("./sanpham");
-
+const addCardRouter = require("./addCard");
+const nguoidungRouter = require("./nguoidung");
+const exitsRouter = require("./exits");
 const middlewares = require("../app/models/middlewares");
 
-// const checkUserLogin= (req,res,next) => {
-//   const nonSecurePaths=['/','/dangky','/xacthuc','/dangnhap'];
-//   if (nonSecurePaths.includes(req.path)) return next();
-//   if (user) {
-//     next();
-//   }else {
-
-//   }
-// }
-
 function route(app) {
+    app.use("/nguoidung", middlewares, nguoidungRouter);
     app.use("/dangky", dangkyRouter);
     app.use("/xacthuc", activeRouter);
     app.use("/dangnhap", dangnhapRouter);
-    app.use("/sanpham", middlewares, sanphamRouter);
+    app.use("/sanpham", sanphamRouter);
+    app.use("/addcard", addCardRouter);
+    app.use("/exit", exitsRouter);
     app.use("/", homeRouter);
 }
 

@@ -155,6 +155,12 @@
         background: var(--top-act-group-bg-color);
         box-shadow: 0px 20px 60px 10px var(--top-act-group-shadow);
     }
+    &__btn-wrap {
+        position: relative;
+        &:hover .act-dropdown {
+            display: block;
+        }
+    }
     &__btn {
         @extend %flexItemCenter;
         gap: 10px;
@@ -199,5 +205,113 @@
     @include abstracts.screen(sm) {
         height: 44px;
         padding: 0 20px;
+    }
+}
+
+.act-dropdown {
+    position: absolute;
+    top: 45px;
+    right: -70px;
+    width: min(545px, 100vw);
+    padding-top: 22px;
+    display: none;
+
+    &__inner {
+        padding: 20px;
+        border-radius: 20px;
+        background: var(--header-act-dropdown-bg);
+        box-shadow: 0px 40px 90px 20px var(--header-act-dropdown-shadow);
+    }
+    &__arrow {
+        position: absolute;
+        top: 5px;
+        right: 95px;
+        height: 21px;
+    }
+    &__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+    &__title {
+        font-size: 2.2rem;
+        font-weight: 500;
+        line-height: 145.455%;
+    }
+    &__view-all {
+        color: var(--blue-blue, #0071dc);
+        font-size: 2.2rem;
+        font-weight: 400;
+        line-height: 145.455%;
+    }
+    &__bottom {
+        margin: 10px 0;
+        padding: 10px 0;
+        border-width: 1.5px 0;
+        border-color: #d2d1d6;
+        border-style: solid;
+    }
+    &__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &--bold {
+            font-weight: 500;
+        }
+    }
+    &__row + &__row {
+        margin-top: 10px;
+    }
+    &__label,
+    &__value {
+        font-size: 2.2rem;
+        line-height: 145.455%;
+    }
+    &__checkout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &-btn {
+            min-width: 200px;
+            height: 68px;
+            border-radius: 50%;
+        }
+    }
+
+    &__list {
+        padding-bottom: 5px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+}
+.cart-preview-item {
+    text-align: left;
+
+    &__img-wrap {
+        position: relative;
+        padding-top: 100%;
+        border: 1px solid #ebebeb;
+        border-radius: 10px;
+    }
+
+    &__thubm {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    &__title {
+        margin-top: 10px;
+        font-size: 1.4rem;
+        line-height: 142.875%;
+    }
+    &__price {
+        margin-top: 6px;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 146.667%;
     }
 }

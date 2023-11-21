@@ -16,24 +16,30 @@ class HomeController {
     // Get /news
     home(req, res, next) {
         const cookies = req.cookies;
+
         let User_Id = null;
         let decoded = verifyToken(cookies.token);
         if (decoded) {
             User_Id = decoded.Id;
         }
-        console.log("Giá trị ID:", User_Id);
+
         if (User_Id) {
-            console.log("Giá trị ID Tồn tại:", User_Id);
             db.getItemUser(User_Id)
                 .then((Items) => {
-                    res.render("home", { Items, layout: "main-logined" });
+                    res.render("home", {
+                        Items: Items[0],
+                        Card: Items[1],
+                        layout: "main-logined",
+                    });
                 })
                 .catch(next);
         } else {
-            console.log("Giá trị ID Không tồn tại:", User_Id);
             db.getItems()
                 .then((Items) => {
-                    res.render("home", { Items });
+                    res.render("home", {
+                        Items: Items[0],
+                        Card: Items[1],
+                    });
                 })
                 .catch(next);
         }

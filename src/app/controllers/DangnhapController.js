@@ -34,7 +34,6 @@ class DangnhapController {
                     });
             })
             .then((data) => {
-                console.log("ket qua cuoi cung check", data);
                 if (data.Mess.length == 0 && data.Pass) {
                     const token = jwt.sign(
                         { Id: data.Id },
