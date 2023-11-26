@@ -1,0 +1,67 @@
+<main class="branch">
+    <div class="container">
+        <div class="branch-container">
+            <h2 class="branch-title">Chi nhánh</h2>
+            {{#each Items}}
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="branch-info">
+                            <picture class="branch-info__thumb">
+                                <img
+                                    src="{{this.Br_Img}}"
+                                    alt=""
+                                    class="branch-info__img"
+                                />
+                            </picture>
+
+                            <div class="branch-info__list">
+                                <div class="branch-info__items">
+                                    <span class="branch-info__icon"><img
+                                            src="./icons/branch.svg"
+                                            alt=""
+                                            class="icon"
+                                        /></span>
+
+                                    <p
+                                        class="branch-info__items--desc"
+                                    >{{this.Br_Name}}</p>
+
+                                </div>
+
+                                <div class="branch-info__items">
+                                    <span class="branch-info__icon"><img
+                                            src="./icons/address.svg"
+                                            alt=""
+                                            class="icon"
+                                        /></span>
+
+                                    <p
+                                        class="branch-info__items--desc"
+                                    >{{this.Br_Adress}}</p>
+
+                                </div>
+
+                                <div class="branch-info__items">
+                                    <span class="branch-info__icon"><img
+                                            src="./icons/phone.svg"
+                                            alt=""
+                                            class="icon"
+                                        /></span>
+
+                                    <p
+                                        class="branch-info__items--desc"
+                                    >{{this.Br_Phone}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     
+
+                </div>
+
+            {{/each}}
+        </div>
+    </div>
+</main>

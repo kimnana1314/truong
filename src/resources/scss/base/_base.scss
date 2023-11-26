@@ -50,12 +50,28 @@ section {
     }
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 .prevent-select {
     user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
 }
-
+.cart_order--status {
+    width: 26px;
+    height: 26px;
+    object-fit: cover;
+}
 #toasts {
     position: fixed;
     bottom: 10px;
@@ -81,7 +97,7 @@ section {
 }
 
 .toast.warning {
-    background: rgba(255, 165, 0, 0.4);
+    background: rgba(255, 166, 0, 0.4);
     border-color: rgb(255, 165, 0);
 }
 

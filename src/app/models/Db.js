@@ -55,6 +55,23 @@ async function UserRegister(User_Json) {
         console.log(error);
     }
 }
+
+async function UserResetPassword(User_Json) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let User = await pool
+            .request()
+            .input("json", sql.NVarChar, User_Json)
+            .output("Mess", "")
+            .output("Email", "")
+            .output("Id", "")
+            .execute("sp_User_Reset_password");
+        return User.output;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function UserLogin(User_Email) {
     try {
         let pool = await sql.connect(config.dbConfig);
@@ -94,7 +111,7 @@ async function send_Mail(Email, Id, Ref) {
             secure: false,
             auth: {
                 user: "phanmenhdsw@gmail.com",
-                pass: "coei gdpu ecke iblh",
+                pass: process.env.EMAIL_PASS,
             },
             tls: {
                 ciphers: "SSLv3",
@@ -158,6 +175,22 @@ async function PostUser_Love(User_Id, Item_Id, Love) {
     }
 }
 
+async function PostOrder(Json, User_Id) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let User = await pool
+            .request()
+            .input("Json", sql.NVarChar, Json)
+            .input("User_Id", sql.VarChar, User_Id)
+            .output("Mess", "")
+            .output("Id", "")
+            .execute("sp_Order_Play");
+        return User.output;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function PostUser_AddCard(User_Id, Item_Id, Love) {
     try {
         let pool = await sql.connect(config.dbConfig);
@@ -182,6 +215,46 @@ async function get_Item_User(User_Id, Item_Id) {
             .input("User_Id", sql.VarChar, User_Id)
             .input("Item_Id", sql.VarChar, Item_Id)
             .execute("sp_Views_find");
+        return Items.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getOrderFind(User_Id, Tran_Num) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let Items = await pool
+            .request()
+            .input("User_Id", sql.VarChar, User_Id)
+            .input("Tran_Num", sql.VarChar, Tran_Num)
+            .execute("sp_order_find");
+        return Items.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getOrderAllFind(User_Id) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let Items = await pool
+            .request()
+            .input("User_Id", sql.VarChar, User_Id)
+            .execute("sp_view_OrderAll");
+        return Items.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function FavoriteProduct(User_Id) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let Items = await pool
+            .request()
+            .input("User_Id", sql.VarChar, User_Id)
+            .execute("sp_FavoriteProduct");
         return Items.recordsets;
     } catch (error) {
         console.log(error);
@@ -237,6 +310,84 @@ async function Postprofile_user(
     }
 }
 
+async function Postprofile_Change_password(User_Id, User_Password) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let User = await pool
+            .request()
+            .input("User_Id", sql.VarChar, User_Id)
+            .input("User_Password", sql.NVarChar, User_Password)
+            .output("Mess", "")
+            .output("Id", "")
+            .execute("sp_Update_profile_Change_password");
+        return User.output;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function MailRestPass(Email, Id, pass) {
+    try {
+        var transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false,
+            auth: {
+                user: "phanmenhdsw@gmail.com",
+                pass: process.env.EMAIL_PASS,
+            },
+            tls: {
+                ciphers: "SSLv3",
+            },
+        });
+
+        var mailOptions = {
+            from: "phanmenhdsw@gmail.com",
+            to: Email,
+            subject: "ĐẶT LẠI MẬT KHẨU ",
+            text:
+                "Mật khẩu mới của quý khách là: " +
+                pass +
+                "  Bấm vào link bên để đăng nhập:  " +
+                process.env.WEB_URI +
+                "/dangnhap",
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Email sent: " + info.response);
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getBranch() {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let Items = await pool.request().execute("sp_view_Branch");
+        return Items.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getBranchUser(User_Id) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let Items = await pool
+            .request()
+            .input("User_Id", sql.VarChar, User_Id)
+            .execute("sp_view_Branch_User");
+        return Items.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     getItems: getItems,
     getItem: getItem,
@@ -252,4 +403,13 @@ module.exports = {
     PostUser_AddCard: PostUser_AddCard,
     getprofile_user: getprofile_user,
     Postprofile_user: Postprofile_user,
+    UserResetPassword: UserResetPassword,
+    MailRestPass: MailRestPass,
+    Postprofile_Change_password: Postprofile_Change_password,
+    getBranch: getBranch,
+    getBranchUser: getBranchUser,
+    getOrderFind: getOrderFind,
+    PostOrder: PostOrder,
+    FavoriteProduct: FavoriteProduct,
+    getOrderAllFind: getOrderAllFind,
 };

@@ -12,6 +12,7 @@ const verifyToken = (token) => {
     }
     return data;
 };
+
 class HomeController {
     // Get /news
     home(req, res, next) {

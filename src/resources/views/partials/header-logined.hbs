@@ -1,36 +1,49 @@
 <div class="container">
+
     <div class="top-bar">
-        <!-- more -->
-        <button
-            class="top-bar__more d-none d-lg-block js-toggle"
-            toggle-target="#navbar"
-        >
+        <label for="menu-checkbox" class="d-none d-md-block">
+            {{! <button class="top-bar__more d-none d-md-block"> }}
             <img
                 src="./icons/more.svg"
                 alt=""
-                class="icon top-bar__more-icon"
+                class="top-bar__more icon top-bar__more-icon"
             />
-        </button>
-
+            {{! </button> }}
+        </label>
         <!-- logi -->
         <a href="/" class="logo">
-            <img src="./icons/logo.svg" alt="grocerymart" class="logo__img" />
-            <h1 class="logo__title">MÁY LÀM ĐÁ</h1>
+            <img src="./icons/logo.svg" alt="P-EMIC" class="logo__img" />
+            <h1 class="logo__title">P-EMIC</h1>
         </a>
+
+        <input
+            type="checkbox"
+            name=""
+            id="menu-checkbox"
+            class="menu-checkbox"
+            hidden
+        />
+        <!-- more -->
+
+        <label for="menu-checkbox" class="navbar--overlay"></label>
         <!-- nabar -->
         <nav id="navbar" class="navbar">
-            <button
-                class="navbar__close-btn d-none d-lg-block js-toggle"
-                toggle-target="#navbar"
-            >
-                <img src="./icons/arrow-left.svg" alt="" class="icon" />
-            </button>
-            <a href="#!" class="nav-btn d-none d-md-flex">
+
+            <label for="menu-checkbox">
+
+                <img
+                    src="./icons/arrow-left.svg"
+                    alt=""
+                    class="icon navbar__close-btn d-none d-md-block"
+                />
+
+            </label>
+            <a href="/OrderAll" class="nav-btn d-none d-md-flex">
                 <img src="./icons/buy.svg" alt="" class="icon nav-btn__icon" />
                 <span class="nav-btn__title">Card</span>
                 <span class="nav-btn__qty">{{Amt_Card}}</span>
             </a>
-            <a href="#!" class="nav-btn d-none d-md-flex">
+            <a href="/favorite-product" class="nav-btn d-none d-md-flex">
                 <img
                     src="./icons/heart.svg"
                     alt=""
@@ -41,7 +54,7 @@
             </a>
 
         </nav>
-        <div class="navbar--overlay js-toggle" toggle-target="#navbar"></div>
+
         <!-- actions -->
         <div class="top-act">
 
@@ -59,7 +72,7 @@
                     <div class="act-dropdown">
                         <div class="act-dropdown__inner">
                             <img
-                                src="./icons/arrow-up.png"
+                                src="./icons/arrow-up.svg"
                                 alt=""
                                 class="act-dropdown__arrow"
                             />
@@ -85,9 +98,10 @@
                                 class="act-dropdown__checkout act-dropdown__checkout-btn"
                             >
 
-                                <button
+                                <a
+                                    href="/favorite-product"
                                     class="btn btn--primary act-dropdown__checkout-btn btn--rounded"
-                                >Sản phẩm yêu thích</button>
+                                >Sản phẩm yêu thích</a>
                             </div>
                         </div>
                     </div>
@@ -107,7 +121,7 @@
                     <div class="act-dropdown">
                         <div class="act-dropdown__inner">
                             <img
-                                src="./icons/arrow-up.png"
+                                src="./icons/arrow-up.svg"
                                 alt=""
                                 class="act-dropdown__arrow"
                             />
@@ -157,12 +171,20 @@
                             <div
                                 class="act-dropdown__checkout act-dropdown__checkout-btn"
                             >
-                                <button class="act-dropdown__view-all">Tất cả
-                                    đơn hàng</button>
+                                <a
+                                    id="orderViewAll"
+                                    href="/orderAll"
+                                    class="act-dropdown__view-all"
+                                >
+                                    Tất cả đơn hàng
+                                </a>
 
-                                <button
-                                    class="btn btn--primary act-dropdown__checkout-btn btn--rounded"
-                                >Đặt hàng</button>
+                                <a
+                                    href="/order/{{Tran_Num}}"
+                                    class="{{css_trans}}"
+                                >
+                                    Đặt hàng
+                                </a>
                             </div>
                         </div>
                     </div>

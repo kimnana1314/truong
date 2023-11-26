@@ -1,0 +1,45 @@
+<div class="favorite-product-container">
+
+    <div class="favorite-product__Items">
+        <h2 class="favorite-product__Items--title">Sảng phẩm yêu thích</h2>
+        <div class="row row-cols-2 row-cols-lg-1">
+            {{#each Items}}
+                <div class="col">
+                    <article class="favorite-product-card">
+                        <picture class="favorite-product-card__img">
+                            <img
+                                src="{{this.Img}}"
+                                alt=""
+                                class="favorite-product-card__thumb"
+                            />
+                        </picture>
+
+                        <div class="favorite-product__info">
+
+                            <h3 class="favorite-product__info--title">
+                                {{this.Item_Name}}</h3>
+                            <p class="favorite-product__info--price">
+                                Đơn giá:{{this.Price}}</p>
+
+                            <p class="favorite-product__info--desc">
+                                Công suất:{{this.Voltage}}</p>
+                            <p class="favorite-product__info--desc">
+                                Số viên đá/mẻ:{{this.Qty_Batch}}</p>
+
+                            <p class="favorite-product__info--desc">
+                                Size đá:
+                                {{this.Size_M}}</p>
+                            <p class="favorite-product__info--desc">
+                                Sảng lượng:
+                                {{this.Weigth_M}}</p>
+
+                        </div>
+
+                    </article>
+                </div>
+            {{/each}}
+        </div>
+
+    </div>
+
+</div>

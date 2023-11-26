@@ -1,0 +1,151 @@
+<div class="order-container">
+    <form action="" class="order-from">
+
+        <div class="order-from__group">
+            <h2 class="order-from__group--title">1.Người nhận</h2>
+            <div class="order-from__Items">
+
+                 
+                <input
+                    class="order-from__Items--text"
+                    type="text"
+                    id="Ascendant"
+                    name="Ascendant"
+                    placeholder="Tên người nhận"
+                    value="{{this.Ascendant}}"
+                />
+            </div>
+            <div class="order-from__Items">
+
+                 
+                <input
+                    class="order-from__Items--text"
+                    type="text"
+                    id="Adress"
+                    name="Adress"
+                    placeholder="Địa chỉ"
+                    value="{{this.Adress}}"
+                />
+            </div>
+
+            <div class="order-from__Items">
+
+                 
+                <input
+                    class="order-from__Items--text"
+                    type="text"
+                    id="Phone"
+                    name="Phone"
+                    placeholder="Điện thoại"
+                    value="{{this.Phone}}"
+                />
+            </div>
+
+        </div>
+        <div class="order-from__Items">
+            <h2 class="order-from__group--title">2.Danh sách sản phẩm</h2>
+            <div class="row row-cols-2 row-cols-lg-1">
+                {{#each Items}}
+                    <div id="Order_{{this.Item_Id}}" class="col">
+                        <article class="order-card">
+                            <picture class="order-card__img">
+                                <img
+                                    src="{{this.Img}}"
+                                    alt=""
+                                    class="order-card__thumb"
+                                />
+                            </picture>
+
+                            <div class="order-card__info">
+                                <div class="order-card__info--heading">
+                                    <h3 class="order-card__info--title">
+                                        {{this.Item_Name}}</h3>
+                                    <p
+                                        class="order-card__info--amt"
+                                        id="Order_Amt_{{this.Item_Id}}"
+                                    >
+                                        {{this.Item_Amt}}</p>
+                                </div>
+                                <p
+                                    class="order-card__info--price"
+                                    id="Order_Price_{{this.Item_Id}}"
+                                    name="Order_Price"
+                                >
+                                    {{this.Price}}
+                                </p>
+                                <div class="order-card__act">
+                                    <div
+                                        class="order-card__act--btn prevent-select"
+                                    >
+                                        <button
+                                            class="orderRemove"
+                                            data-item_id="{{this.Item_Id}}"
+                                        >
+                                            <img
+                                                src="./icons/remove.svg"
+                                                alt=""
+                                                class="icon"
+                                            />
+                                        </button>
+
+                                        <input
+                                            type="number"
+                                            id="Qty_{{this.Item_Id}}"
+                                            name="Order_Qty"
+                                            value="{{this.Qty}}"
+                                            disabled="true"
+                                            min="1"
+                                            class="order-card__act--qty"
+                                            data-item_id="{{this.Item_Id}}"
+                                        />
+                                        <button
+                                            class="orderAdd"
+                                            data-item_id="{{this.Item_Id}}"
+                                        >
+                                            <img
+                                                src="./icons/add.svg"
+                                                alt=""
+                                                class="icon"
+                                            />
+                                        </button>
+
+                                    </div>
+                                    <button
+                                        class="btn btn--outline orderDelete"
+                                        data-item_id="{{this.Item_Id}}"
+                                    >
+                                        <img
+                                            src="./icons/delete.svg"
+                                            alt=""
+                                            class="icon"
+                                        />
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </article>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="row row-cols-1">
+                <div class="order-from__total">
+                    <div class="order-from__amt">
+                        <span>
+                            <img src="./icons/money.svg" alt="" class="icon" />
+                        </span>
+
+                        <p
+                            id="Order_money"
+                            class="order-from__amt--total"
+                        >{{sumAmt Items}}</p>
+
+                    </div>
+
+                    <button id="OrderItemPay" class="btn btn--primary">Đặt hàng</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

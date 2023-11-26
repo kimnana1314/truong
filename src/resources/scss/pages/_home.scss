@@ -2,8 +2,14 @@
 .home {
     &__container {
         margin-top: 40px;
+        margin-right: 15px;
+        margin-left: -15px;
+        --grid-gutter-y: 10px;
         @include abstracts.screen(lg) {
             margin-top: 30px;
+        }
+        @include abstracts.screen(sm) {
+            margin-right: -15px;
         }
     }
     &__product {

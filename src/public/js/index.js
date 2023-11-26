@@ -1,21 +1,38 @@
 // dang ky
 $(document).ready(function () {
+    $(function () {
+        setInterval(function () {
+            $(".slideshow__item > picture:first")
+                .slideDown()
+                .fadeOut()
+                .next("picture")
+                .slideDown()
+                .fadeIn()
+                .end()
+                .appendTo(".slideshow__item");
+        }, 3000);
+    });
+
     let theme_main = localStorage.getItem("theme");
     if (theme_main) {
         $("#Id_main").attr("class", theme_main);
         if (theme_main === "dark") {
             $("#theme_st").attr("src", "./icons/toi.svg");
             $("#Id_gd").text("Bật giao diện sáng");
+            $("#Order_table").removeAttr("class");
+            $("#Order_table").attr("class", "table table-hover table-dark");
         } else {
             $("#theme_st").attr("src", "./icons/sang.svg");
             $("#Id_gd").text("Bật giao diện tối");
+            $("#Order_table").removeAttr("class");
+            $("#Order_table").attr("class", "table table-hover");
         }
     } else {
         $("#Id_main").removeAttr("class");
         $("#theme_st").attr("src", "./icons/sang.svg");
         $("#Id_gd").text("Bật giao diện tối");
     }
-
+    // đăng ký
     $("#btn_dangky").on("click", function (e) {
         e.preventDefault();
         if (
@@ -49,6 +66,31 @@ $(document).ready(function () {
 
             $.ajax(url, settings);
         }
+    });
+    // reset password
+
+    $("#btn_Rest_password").on("click", function (e) {
+        e.preventDefault();
+
+        var url = "/reset-password";
+        alert($("form").serialize());
+        var settings = {
+            data: $("form").serialize(),
+            method: "POST",
+            statusCode: {},
+            success: function (data, textStatus, jqXHR) {
+                if (data.Mess.length == 0) {
+                    createToast("success", "Đặt lại mật khẩu thành công!");
+                } else {
+                    createToast("warning", data.Mess);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                createToast("error", xhr.responseText);
+            },
+        };
+
+        $.ajax(url, settings);
     });
 
     $("#btnAcitive").on("click", function (e) {
@@ -308,6 +350,7 @@ $(document).ready(function () {
         if (Cart_html) {
             let cards = JSON.parse(Cart_html);
             let list = $("#html_card_Item");
+
             list.children().detach();
             $.each(cards, function (index, value) {
                 let html = document.createElement("div");
@@ -436,6 +479,42 @@ $(document).ready(function () {
             },
         });
     });
+    // Thay đổi mật khẩu
+    $("#btn_profile_change_password").on("click", function (e) {
+        e.preventDefault();
+        if ($("input[name='User_Password']").val().length < 6) {
+            createToast("warning", "Mật khẩu phải ít nhất 6 ký tự");
+        } else {
+            if (
+                $("input[name='User_Password']").val() !=
+                $("input[name='User_PasswordConfirm']").val()
+            ) {
+                createToast("warning", "Mật khẩu xác nhận không đúng");
+            } else {
+                $.ajax({
+                    url: "/changepassword",
+                    type: "POST",
+                    dataType: "json",
+                    contentType:
+                        "application/x-www-form-urlencoded; charset=UTF-8",
+                    data: $("form").serialize(),
+                    success: function (data, textStatus, jqXHR) {
+                        if (data.Mess.length == 0) {
+                            createToast(
+                                "success",
+                                "Thay đổi mật khẩu thành công!"
+                            );
+                        } else {
+                            createToast("warning", data.Mess);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        createToast("error", xhr.responseText);
+                    },
+                });
+            }
+        }
+    });
 
     // Id_Exit
     $("#Id_Exit").on("click", function (e) {
@@ -461,5 +540,145 @@ $(document).ready(function () {
         setTimeout(() => {
             window.location = "/";
         }, 2000);
+    });
+
+    // Order
+
+    // btn_Order_Add và orderRemove
+
+    $(".orderAdd").on("click", function (e) {
+        e.preventDefault();
+        let button = $(this).parent();
+        let Order_money = $("#Order_money");
+        let amt_total = Number($("#Order_money").text().replace(/,/g, ""));
+        let Item_Id = button.prevObject.attr("data-item_id");
+        let Qty_Item = "#Qty_" + Item_Id;
+        let Qty = Number($(Qty_Item).val()) + 1;
+        let Price_Item = "#Order_Price_" + Item_Id;
+        let Amt_Item = "#Order_Amt_" + Item_Id;
+        let Price = Number($(Price_Item).text().replace(/,/g, ""));
+        let Amt = Qty * Price;
+        amt_total = amt_total + Price;
+        $(Qty_Item).val(Qty);
+        $(Amt_Item).text(
+            Amt.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        );
+        $("#Order_money").text(
+            amt_total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        );
+    });
+
+    $(".orderRemove").on("click", function (e) {
+        e.preventDefault();
+        let button = $(this).parent();
+        let Order_money = $("#Order_money");
+        let amt_total = Number($("#Order_money").text().replace(/,/g, ""));
+        let Item_Id = button.prevObject.attr("data-item_id");
+        let Qty_Item = "#Qty_" + Item_Id;
+        let Price_Item = "#Order_Price_" + Item_Id;
+        let Amt_Item = "#Order_Amt_" + Item_Id;
+        let Price = Number($(Price_Item).text().replace(/,/g, ""));
+        if (Number($(Qty_Item).val()) >= 2) {
+            amt_total = amt_total - Price;
+        }
+        let Qty = Number($(Qty_Item).val()) - 1;
+        if (Qty <= 0) {
+            Qty = 1;
+        }
+
+        let Amt = Qty * Price;
+
+        $(Qty_Item).val(Qty);
+        $(Amt_Item).text(
+            Amt.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        );
+        $("#Order_money").text(
+            amt_total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        );
+    });
+
+    // orderDelete
+
+    $(".orderDelete").on("click", function (e) {
+        e.preventDefault();
+        let Order_money = $("#Order_money");
+        let amt_total = Number($("#Order_money").text().replace(/,/g, ""));
+        let button = $(this).parent();
+        let Item_Id = button.prevObject.attr("data-item_id");
+        let Order_Item = "#Order_" + Item_Id;
+        let Amt_Item = "#Order_Amt_" + Item_Id;
+        let Amt = Number($(Amt_Item).text().replace(/,/g, ""));
+        amt_total = amt_total - Amt;
+        if (Order_Item) {
+            $("#Order_money").text(
+                amt_total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            );
+            $(Order_Item).remove();
+        }
+    });
+    // OrderItemPay
+    $("#OrderItemPay").on("click", function (e) {
+        e.preventDefault();
+        let Url = location.href;
+        let ArayTran_Num = location.href.split("/");
+        let Tran_Num = ArayTran_Num[ArayTran_Num.length - 1];
+
+        let Tran_Card = {
+            Tran_Num: Tran_Num,
+            Ascendant: $("#Ascendant").val().trim(),
+            Adress: $("#Adress").val().trim(),
+            Phone: $("#Phone").val().trim(),
+        };
+        let Trans = [];
+
+        $(".order-card__act--qty").each(function () {
+            let Items = {
+                Item_Id: $(this).parent().prevObject.attr("data-item_id"),
+                Qty: Number($(this).val()),
+            };
+            Trans.push(Items);
+        });
+
+        let Count = Trans.length;
+        if ($("#Ascendant").val().trim().length == 0) {
+            createToast("warning", "Phải nhập tên người nhận");
+            return;
+        }
+        if ($("#Adress").val().trim().length == 0) {
+            createToast("warning", "Phải nhập địa chỉ");
+            return;
+        }
+        if ($("#Phone").val().trim().length == 0) {
+            createToast("warning", "Phải nhập điện thoại");
+            return;
+        }
+
+        if (Trans.length == 0) {
+            createToast("warning", "Chưa có sản phẩm nào ở đơn hàng");
+            return;
+        }
+
+        let Obj_Items = {
+            Tran_Card: Tran_Card,
+            Trans: Trans,
+        };
+
+        $.ajax({
+            url: Url,
+            type: "POST",
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            data: JSON.stringify(Obj_Items),
+            success: function (data, textStatus, jqXHR) {
+                if (data.Mess.length > 0) {
+                    createToast("warning", data.Mess);
+                } else {
+                    createToast("success", "Đăng ký đặt hàng thành công!");
+                }
+            },
+            error: function (xhr, status, error) {
+                createToast("error", xhr.responseText);
+            },
+        });
     });
 });

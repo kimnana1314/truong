@@ -1,6 +1,12 @@
+@use "../abstracts";
 .profile {
     &-container {
         margin-top: 30px;
+        margin-right: 15px;
+        margin-left: -15px;
+        @include abstracts.screen(sm) {
+            margin-right: -15px;
+        }
     }
     &__sidebar {
         border-radius: 20px;

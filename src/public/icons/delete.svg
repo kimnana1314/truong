@@ -1,18 +1,5 @@
-
-<svg width="1318" height="730" viewBox="0 0 1318 730" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_b_2024_5058)">
-<rect width="1318" height="730" fill="url(#paint0_linear_2024_5058)"/>
-</g>
-<defs>
-<filter id="filter0_b_2024_5058" x="-300" y="-300" width="1918" height="1330" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feGaussianBlur in="BackgroundImageFix" stdDeviation="150"/>
-<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_2024_5058"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_2024_5058" result="shape"/>
-</filter>
-<linearGradient id="paint0_linear_2024_5058" x1="659" y1="0" x2="659" y2="730" gradientUnits="userSpaceOnUse">
-<stop stop-color="white" stop-opacity="0.4"/>
-<stop offset="1" stop-color="white" stop-opacity="0.1"/>
-</linearGradient>
-</defs>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M19.3248 9.46875C19.3248 9.46875 18.7818 16.2037 18.4668 19.0407C18.3168 20.3957 17.4798 21.1898 16.1088 21.2148C13.4998 21.2618 10.8878 21.2648 8.27979 21.2098C6.96079 21.1828 6.13779 20.3788 5.99079 19.0478C5.67379 16.1858 5.13379 9.46875 5.13379 9.46875" stroke="#9E9DA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.708 6.24023H3.75" stroke="#9E9DA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.4405 6.23998C16.6555 6.23998 15.9795 5.68498 15.8255 4.91598L15.5825 3.69998C15.4325 3.13898 14.9245 2.75098 14.3455 2.75098H10.1125C9.53346 2.75098 9.02546 3.13898 8.87546 3.69998L8.63246 4.91598C8.47846 5.68498 7.80246 6.23998 7.01746 6.23998" stroke="#9E9DA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
