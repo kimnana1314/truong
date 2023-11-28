@@ -81,35 +81,72 @@ input[type="number"] {
 }
 
 .toast {
-    padding: 20px;
-    border-radius: 4px;
+    margin-bottom: 20px;
+    border-radius: 99px;
+
     overflow: hidden;
-    margin-bottom: 10px;
     animation: show_slide 1s ease forwards;
     display: flex;
     align-items: center;
-    border-left: 6px solid;
+
+    &__mess {
+        display: flex;
+        padding: 10px;
+        align-items: center;
+        background: #fff;
+        width: 400px;
+        height: 82px;
+        border-radius: 99px;
+        border: 1px solid var(--bg-border-toast);
+        overflow: hidden;
+    }
+    &__mess--heading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 62px;
+        height: 62px;
+        border-radius: 99px;
+        background-color: var(--bg-toast);
+    }
+    &__mess--info {
+        padding: 0 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    &__mess--titel {
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+    &__mess--desc {
+        font-size: 1.4rem;
+        font-weight: 400;
+    }
 }
 
 .toast.success {
-    background-color: rgba(0, 128, 0, 0.4);
-    border-color: rgb(0, 128, 0);
+    --bg-border-toast: #399b35;
+    --bg-toast: rgba(0, 255, 0, 0.2);
+    background: var(--bg-toast);
 }
 
 .toast.warning {
-    background: rgba(255, 166, 0, 0.4);
-    border-color: rgb(255, 165, 0);
+    --bg-border-toast: #f5ab23;
+    --bg-toast: rgba(255, 255, 0, 0.2);
+    background: var(--bg-toast);
 }
 
 .toast.error {
-    background-color: rgba(255, 0, 0, 0.4);
-    border-color: rgb(255, 0, 0);
+    --bg-border-toast: #e3322d;
+    --bg-toast: rgba(255, 0, 0, 0.2);
+    background: var(--bg-toast);
 }
 
 .toast .msg {
     padding: 0 20px;
     font-size: 16px;
-    color: white;
+    color: #000;
 }
 
 .countdown {

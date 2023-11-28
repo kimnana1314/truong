@@ -32,8 +32,11 @@
         "mongoose": "^8.0.0",
         "msnodesqlv8": "^4.1.1",
         "mssql": "^10.0.1",
+        "multer": "^1.4.5-lts.1",
         "nodemailer": "^6.9.7",
-        "python2": "^0.0.1"
+        "python2": "^0.0.1",
+        "sharp": "^0.32.6",
+        "uuid": "^9.0.1"
     },
     "devDependencies": {
         "husky": "^8.0.3",

@@ -1,27 +1,23 @@
 <main class="auth">
-    <div class="auth__intro d-md-none">
-        <img src="./img/auth/sign-up.svg" alt="" class="auth__intro-img" />
-        <p class="auth__intro-text">
-            Giá trị thương hiệu cao cấp nhất, sản phẩm chất lượng cao và dịch vụ
-            sáng tạo
-        </p>
-    </div>
+
     <div class="auth__content">
         <div class="auth__content-inner">
             <a href="/" class="logo">
                 <img src="./icons/logo.svg" alt="P-EMIC" class="logo__img" />
                 <h1 class="logo__title">P-EMIC</h1>
             </a>
-            <h1 class="auth__heading">Đăng ký</h1>
-            <p class="auth__desc">Hãy tạo tài khoản của bạn và mua sắm như một
-                người chuyên nghiệp và tiết kiệm tiền.</p>
-            <form action="" class="form auth__form" id="Frm_dangky">
+            <h1 class="auth__heading">Xin chào!</h1>
+            <p class="auth__desc">
+                Chào mừng bạn quay lại đăng nhập. Là khách hàng cũ, bạn có truy
+                cập vào tất cả thông tin đã lưu trước đó của bạn.
+            </p>
+            <form action="/" class="form auth__form">
                 <div class="form__group">
                     <div class="form__text-input">
                         <input
                             type="email"
                             name="User_Email"
-                            id="User_Email"
+                            id=""
                             placeholder="Email"
                             class="form__input"
                             required
@@ -37,15 +33,14 @@
                             class="form__input-icon--error"
                         />
                     </div>
-                    <p class="form__error" id="err_email">Email không đúng định
-                        dạng</p>
+                    <p class="form__error">Email chưa đúng định dạng</p>
                 </div>
                 <div class="form__group">
                     <div class="form__text-input">
                         <input
                             type="password"
                             name="User_Password"
-                            id="User_Password"
+                            id=""
                             placeholder="Password"
                             class="form__input"
                             required
@@ -62,56 +57,30 @@
                             class="form__input-icon--error"
                         />
                     </div>
-                    <p class="form__error" id="err_pas">Mật khẩu tối thiểu 6 ký
+                    <p class="form__error" id="mess_error">Mật khẩu ít nhất 6 ký
                         tự</p>
-                </div>
-
-                <div class="form__group">
-                    <div class="form__text-input">
-                        <input
-                            type="password"
-                            name="User_PasswordConfirm"
-                            id="User_PasswordConfirm"
-                            placeholder="Confirm Password"
-                            class="form__input"
-                            required
-                            minlength="6"
-                        />
-                        <img
-                            src="./icons/key.svg"
-                            alt=""
-                            class="form__input-icon icon"
-                        />
-                        <img
-                            src="./icons/form-error.svg"
-                            alt=""
-                            class="form__input-icon--error"
-                        />
-                    </div>
-                    <p class="form__error">Mật khẩu tối thiểu 6 ký tự</p>
 
                 </div>
+
                 <div class="form__group form__group--inline">
 
-                    <a href="/reset-password" class="auth__link">Khôi phục mật
-                        khẩu</a>
+                    <a href="/reset-password" class="auth__link">
+                        Khôi phục mật khẩu</a>
                     <p class="form__mess form__mess--err" id="output">
                     </p>
                 </div>
                 <div class="form__group auth__btn-group">
                     <button
-                        type="submit"
-                        id="btn_dangky"
+                        id="btnLogin"
                         class="btn btn--primary form__submit-btn"
-                    >Đăng ký</button>
+                    >Đăng nhập</button>
 
                 </div>
             </form>
             <div class="auth__act">
-                <p class="auth__text">Bạn đã có tài khoản chưa?</p>
-                <a href="./dangnhap" class="auth__link"> Đăng nhập</a>
+                <p class="auth__text">Vẫn chưa có tài khoản?</p>
+                <a href="/register" class="auth__link"> Đăng ký</a>
             </div>
         </div>
     </div>
-
 </main>

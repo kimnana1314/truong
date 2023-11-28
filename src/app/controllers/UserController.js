@@ -1,5 +1,7 @@
 const db = require("../models/Db");
 const jwt = require("jsonwebtoken");
+const Resize = require("../models/Resize");
+
 require("dotenv").config();
 
 const verifyToken = (token) => {
@@ -12,7 +14,7 @@ const verifyToken = (token) => {
     }
     return data;
 };
-class NguoidungController {
+class UserController {
     // Get /news
     show(req, res, next) {
         const cookies = req.cookies;
@@ -24,7 +26,7 @@ class NguoidungController {
 
         db.getprofile_user(User_Id)
             .then((Items) => {
-                res.render("nguoidung", {
+                res.render("user", {
                     Items: Items[0],
                     Card: Items[1],
                     layout: "main-logined",
@@ -54,6 +56,43 @@ class NguoidungController {
                 .catch(next);
         }
     }
+
+    async post(req, res, next) {
+        const cookies = req.cookies;
+        let User_Id = null;
+        let decoded = verifyToken(cookies.token);
+        if (decoded) {
+            User_Id = decoded.Id;
+        }
+
+        if (User_Id) {
+            // folder upload
+            const imagePath = "./img/auth";
+            console.log("---------------------------");
+            console.log(
+                "---------------------------",
+                JSON.stringify(req.body.image)
+            );
+            console.log("---------------------------");
+
+            // upload.single("image");
+            // call class Resize
+
+            const fileUpload = new Resize(imagePath);
+            if (!req.body.image) {
+                res.status(401).json({
+                    error: "Lỗi upload file ảnh",
+                    avarta: "",
+                });
+            }
+            const filename = await fileUpload.save(
+                req.body.image.buffer,
+                "avartar_1"
+            );
+
+            return res.status(200).json({ error: "", avarta: filename });
+        }
+    }
 }
 
-module.exports = new NguoidungController();
+module.exports = new UserController();

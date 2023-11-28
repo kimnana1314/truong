@@ -127,7 +127,7 @@ async function send_Mail(Email, Id, Ref) {
                 Ref +
                 "  Bấm vào link bên để kích hoạt tài khoản:  " +
                 process.env.WEB_URI +
-                "/xacthuc?key=" +
+                "/active?key=" +
                 Id,
         };
 
@@ -350,7 +350,7 @@ async function MailRestPass(Email, Id, pass) {
                 pass +
                 "  Bấm vào link bên để đăng nhập:  " +
                 process.env.WEB_URI +
-                "/dangnhap",
+                "/log-in",
         };
 
         transporter.sendMail(mailOptions, function (error, info) {

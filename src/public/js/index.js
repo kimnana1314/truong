@@ -42,7 +42,7 @@ $(document).ready(function () {
             $("#output").addClass("form__mess--err");
             $("#output").html("Mật khẩu xác nhận chưa chính xác");
         } else {
-            var url = "/dangky";
+            var url = "/register";
             var settings = {
                 data: $("form").serialize(),
                 method: "POST",
@@ -96,7 +96,7 @@ $(document).ready(function () {
     $("#btnAcitive").on("click", function (e) {
         e.preventDefault();
         $.ajax({
-            url: "/xacthuc",
+            url: "/active",
             type: "POST",
             dataType: "json",
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -105,7 +105,7 @@ $(document).ready(function () {
                 if (data.Mess.length > 0) {
                     $("#output").html(data.Mess);
                 } else {
-                    top.location.href = "/dangnhap"; //redirection
+                    top.location.href = "/log-in"; //redirection
                 }
             },
             error: function (xhr, status, error) {
@@ -117,7 +117,7 @@ $(document).ready(function () {
     $("#btnLogin").on("click", function (e) {
         e.preventDefault();
         $.ajax({
-            url: "/dangnhap",
+            url: "/log-in",
             type: "POST",
             dataType: "json",
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -383,42 +383,55 @@ $(document).ready(function () {
 
     const toasts = {
         success: {
-            icon: '<img src="./icons/success.svg"  alt=""  class="toasts_img">',
+            icon: "success.svg",
+            titel: "Thành công",
         },
         error: {
-            icon: '<img src="./icons/error.svg"  alt=""  class="toasts_img">',
+            icon: "error.svg",
+            titel: "Lỗi",
         },
         warning: {
-            icon: '<img src="./icons/warning.svg" alt=""    class="toasts_img">',
+            icon: "warning.svg",
+            titel: "Cảnh báo",
         },
     };
 
     function createToast(status, mes) {
         let toast = document.createElement("div");
         let myArray;
-        if (mes.length == 0) {
-            mes = "Lỗi khi thực hiện chức năng này!";
-            myArray = mes.split(" ");
-        } else {
-            myArray = mes.split(" ");
-        }
-
         let mess = "";
-        if (myArray.length > 8) {
-            for (var i = 0; i < 8; i++) {
-                mess += myArray[i] + " ";
+        if (mes) {
+            if (mes.length == 0) {
+                mes = "Lỗi khi thực hiện chức năng này!";
+                myArray = mes.split(" ");
+            } else {
+                myArray = mes.split(" ");
             }
-            mess = mess + "...";
+
+            if (myArray.length > 8) {
+                for (var i = 0; i < 8; i++) {
+                    mess += myArray[i] + " ";
+                }
+                mess = mess + "...";
+            } else {
+                mess = mes;
+            }
         } else {
-            mess = mes;
+            mess = "Lỗi khi thực hiện chức năng này!";
         }
 
         toast.className = `toast ${status}`;
 
         toast.innerHTML = `
-    ${toasts[status].icon}
-    <span class="msg">${mess}</span>
-    <span class="countdown"></span>
+    <div class="toast__mess">
+       <div class="toast__mess--heading">
+            <img src="./icons/${toasts[status].icon}">
+       </div>
+       <div class="toast__mess--info">
+        <h3 class="toast__mess--titel">${toasts[status].titel} </h3>
+        <p class="toast__mess--desc">${mess} </p>
+       </div>   
+    </div>
     `;
 
         document.querySelector("#toasts").appendChild(toast);
@@ -459,17 +472,14 @@ $(document).ready(function () {
     $("#btn_profile_update").on("click", function (e) {
         e.preventDefault();
         $.ajax({
-            url: "/nguoidung",
+            url: "/user",
             type: "POST",
             dataType: "json",
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
             data: $("form").serialize(),
             success: function (data, textStatus, jqXHR) {
                 if (data.Mess.length == 0) {
-                    createToast(
-                        "success",
-                        "Cập nhật thông tin người dùng thành công"
-                    );
+                    createToast("success", "Cập nhật thông tin người dùng");
                 } else {
                     createToast("warning", data.Mess);
                 }
@@ -530,7 +540,7 @@ $(document).ready(function () {
                 if (data.Mess.length > 0) {
                     $("#output").html(data.Mess);
                 } else {
-                    top.location.href = "/dangnhap";
+                    top.location.href = "/log-in";
                 }
             },
             error: function (xhr, status, error) {
@@ -681,4 +691,75 @@ $(document).ready(function () {
             },
         });
     });
+
+    // profile-user
+
+    let modal = $(".profile__model");
+    let btn_user = $(".profile-user");
+
+    function getBase64Image(img) {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        var dataURL = canvas.toDataURL("image/png");
+        return dataURL;
+        // return dataURL.toString().split("base64,")[1];
+    }
+
+    btn_user.click(function () {
+        $("#img__avarta").attr("src", $(".profile-user__avatar").attr("src"));
+
+        modal.show();
+    });
+
+    $(window).on("click", function (e) {
+        if ($(e.target).is(".profile__model")) {
+            modal.hide();
+        }
+    });
+
+    // img__avarta
+
+    $("#files").change(function () {
+        readURL(this);
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                avarta_img = e.target.result;
+                $("#img__avarta").attr("src", avarta_img);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    // btn_upload
+    $("#btn_upload").on("click", function (e) {
+        e.preventDefault();
+        let avarta_img = getBase64Image(document.getElementById("img__avarta"));
+        alert(avarta_img);
+        $.ajax({
+            url: "/user/post",
+            type: "POST",
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            data: {
+                image: avarta_img,
+            },
+            success: function (data, textStatus, jqXHR) {
+                if (data.Mess.length == 0) {
+                    createToast("success", "Thay đổi mật khẩu thành công!");
+                } else {
+                    createToast("warning", data.Mess);
+                }
+            },
+            error: function (xhr, status, error) {
+                createToast("error", error.toString());
+            },
+        });
+    });
+    //
 });

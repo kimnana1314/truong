@@ -18,9 +18,9 @@ module.exports = (req, res, next) => {
         if (decoded) {
             next();
         } else {
-            res.redirect("/dangnhap");
+            res.redirect("/log-in");
         }
     } else {
-        res.redirect("/dangnhap");
+        res.redirect("/log-in");
     }
 };

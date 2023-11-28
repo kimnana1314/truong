@@ -19,7 +19,7 @@
                             <div class="profile-menu">
                                 <h3 class="profile-menu__title">Quản lý</h3>
                                 <ul class="profile-menu__list">
-                                    <a href="/nguoidung">
+                                    <a href="/user">
                                         <li
                                             class="profile-menu__item prevent-select"
                                         >
@@ -194,4 +194,36 @@
             </div>
         {{/each}}
     </div>
+    <form
+        class="profile__model"
+        method="post"
+        action="user/post"
+        enctype="multipart/form-data"
+    >
+        <div class="profile__model-content">
+            <div class="profile__form-group">
+                <label
+                    for="files"
+                    class="btn btn--primary profile__form-group--label"
+                >Chọn ảnh</label>
+                <input
+                    id="files"
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    class="profile__form-group--input"
+                    style="visibility:hidden;"
+                />
+                <img
+                    id="img__avarta"
+                    src=""
+                    alt=""
+                    class="profile__form-group--img"
+                />
+            </div>
+            <button type="submit" name="upload" class="btn btn--primary">Lưu ảnh</button>
+
+        </div>
+
+    </form>
 </main>

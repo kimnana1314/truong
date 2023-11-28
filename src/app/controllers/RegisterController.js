@@ -1,9 +1,9 @@
 const db = require("../models/Db");
 const bcrypt = require("bcrypt");
-class DangkyController {
+class RegisterController {
     // Get /news
     register(req, res, next) {
-        res.render("dangky", { layout: "main-auth" });
+        res.render("register", { layout: "main-auth" });
     }
 
     async store(req, res, next) {
@@ -26,4 +26,4 @@ class DangkyController {
     }
 }
 
-module.exports = new DangkyController();
+module.exports = new RegisterController();

@@ -12,7 +12,7 @@ const verifyToken = (token) => {
     }
     return data;
 };
-class SanphamController {
+class ProductController {
     // Get /news
     show(req, res, next) {
         const cookies = req.cookies;
@@ -25,7 +25,7 @@ class SanphamController {
         if (User_Id) {
             db.get_Item_User(User_Id, req.params.Item_Id)
                 .then((Items) => {
-                    res.render("Sanpham", {
+                    res.render("product", {
                         Items: Items[0],
                         Card: Items[1],
                         layout: "main-logined",
@@ -35,7 +35,7 @@ class SanphamController {
         } else {
             db.get_Item_User("0", req.params.Item_Id)
                 .then((Items) => {
-                    res.render("Sanpham", { Items: Items[0], Card: Items[1] });
+                    res.render("product", { Items: Items[0], Card: Items[1] });
                 })
                 .catch(next);
         }
@@ -70,4 +70,4 @@ class SanphamController {
     }
 }
 
-module.exports = new SanphamController();
+module.exports = new ProductController();

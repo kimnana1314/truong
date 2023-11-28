@@ -1,10 +1,10 @@
 const homeRouter = require("./home");
-const dangnhapRouter = require("./dangnhap");
+const registerRouter = require("./register");
 const activeRouter = require("./active");
-const dangkyRouter = require("./dangky");
-const sanphamRouter = require("./sanpham");
+const loginRouter = require("./login");
+const productRouter = require("./product");
 const addCardRouter = require("./addCard");
-const nguoidungRouter = require("./nguoidung");
+const userRouter = require("./user");
 const exitsRouter = require("./exits");
 const resetpasswordRouter = require("./resetpassword");
 const changepasswordRouter = require("./changepassword");
@@ -12,15 +12,16 @@ const branchdRouter = require("./branch");
 const orderRouter = require("./order");
 const orderAllRouter = require("./orderAll");
 const favoriteProductRouter = require("./favoriteProduct");
+
 const middlewares = require("../app/models/middlewares");
 
 function route(app) {
-    app.use("/nguoidung", middlewares, nguoidungRouter);
+    app.use("/user", middlewares, userRouter);
     app.use("/changepassword", middlewares, changepasswordRouter);
-    app.use("/dangky", dangkyRouter);
-    app.use("/xacthuc", activeRouter);
-    app.use("/dangnhap", dangnhapRouter);
-    app.use("/sanpham", sanphamRouter);
+    app.use("/register", registerRouter);
+    app.use("/active", activeRouter);
+    app.use("/log-in", loginRouter);
+    app.use("/product", productRouter);
     app.use("/addcard", addCardRouter);
     app.use("/reset-password", resetpasswordRouter);
     app.use("/exit", exitsRouter);

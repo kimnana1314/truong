@@ -1,10 +1,10 @@
 const db = require("../models/Db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-class DangnhapController {
+class LoginController {
     // Get /news
     show(req, res) {
-        res.render("dangnhap", { layout: "main-auth" });
+        res.render("log-in", { layout: "main-auth" });
     }
 
     // Post check login
@@ -53,4 +53,4 @@ class DangnhapController {
     }
 }
 
-module.exports = new DangnhapController();
+module.exports = new LoginController();
