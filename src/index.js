@@ -1,3 +1,5 @@
+const https = require("https");
+const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
@@ -5,9 +7,9 @@ const handlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
-
+dotenv.config();
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 const route = require("./routes");
 // parse application/x-www-form-urlencoded
@@ -27,7 +29,6 @@ app.engine(
         },
     })
 );
-dotenv.config();
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/user/post", express.static(path.join(__dirname, "public")));
@@ -41,6 +42,27 @@ app.use(cookieParser());
 
 route(app);
 
-app.listen(port, () => {
-    console.log(`App listening on port http://localhost:` + process.env.PORT);
+// const options = {
+//     key: fs.readFileSync("server.key"),
+//     cert: fs.readFileSync("server.cert"),
+// };
+
+var privateKey = fs.readFileSync("server.key", "utf8");
+var certificate = fs.readFileSync("server.crt", "utf8");
+
+var credentials = { key: privateKey, cert: certificate };
+
+https.createServer(credentials, app).listen(port, function (req, res) {
+    console.log("Server started at port :", port);
 });
+
+// console.log("---------------------");
+// console.log(options);
+// console.log("---------------------");
+// https.createServer(options, app).listen(port, function (req, res) {
+//     console.log("Server started at port :", port);
+// });
+
+// app.listen(port, () => {
+//     console.log(`App listening on port http://localhost:` + process.env.PORT);
+// });

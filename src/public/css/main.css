@@ -255,10 +255,12 @@ input[type=number] {
   gap: 5px;
 }
 .toast__mess--titel {
+  color: #000;
   font-size: 1.6rem;
   font-weight: 500;
 }
 .toast__mess--desc {
+  color: #000;
   font-size: 1.4rem;
   font-weight: 400;
 }
@@ -2462,7 +2464,7 @@ footer {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 60%;
+  width: 80%;
   border-radius: 8px;
 }
 .profile__model-close {
@@ -2479,6 +2481,7 @@ footer {
 }
 .profile__form-group--label {
   cursor: pointer;
+  width: 125px;
 }
 .profile__form-group--input {
   width: 10px;

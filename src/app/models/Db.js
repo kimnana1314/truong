@@ -55,6 +55,20 @@ async function UserRegister(User_Json) {
         console.log(error);
     }
 }
+async function UserAvartaUpdate(User_Id, User_Avarta) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let User = await pool
+            .request()
+            .input("User_Id", sql.VarChar, User_Id)
+            .input("User_Avarta", sql.NVarChar, User_Avarta)
+            .output("Mess", "")
+            .execute("sp_profile_user_update_Avarta");
+        return User.output;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 async function UserResetPassword(User_Json) {
     try {
@@ -412,4 +426,5 @@ module.exports = {
     PostOrder: PostOrder,
     FavoriteProduct: FavoriteProduct,
     getOrderAllFind: getOrderAllFind,
+    UserAvartaUpdate: UserAvartaUpdate,
 };

@@ -1,3 +1,5 @@
+// Resize.js
+
 const sharp = require("sharp");
 const path = require("path");
 
@@ -5,8 +7,8 @@ class Resize {
     constructor(folder) {
         this.folder = folder;
     }
-    async save(buffer, file_Name) {
-        const filename = Resize.filename(file_Name);
+    async save(buffer, User_Id, img) {
+        const filename = Resize.filename(User_Id, img);
         const filepath = this.filepath(filename);
 
         await sharp(buffer)
@@ -19,9 +21,8 @@ class Resize {
 
         return filename;
     }
-    static filename(file_Name) {
-        // random file name
-        return `avartar_${file_Name}.png`;
+    static filename(User_Id, img) {
+        return `avartar_${User_Id}.${img}`;
     }
     filepath(filename) {
         return path.resolve(`${this.folder}/${filename}`);

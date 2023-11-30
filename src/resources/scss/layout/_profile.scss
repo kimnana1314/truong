@@ -146,7 +146,7 @@
             margin: auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 60%;
+            width: 80%;
             border-radius: 8px;
         }
         &-close {
@@ -163,6 +163,7 @@
         gap: 5px;
         &--label {
             cursor: pointer;
+            width: 125px;
         }
         &--input {
             width: 10px;

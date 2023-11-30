@@ -1,6 +1,5 @@
 const db = require("../models/Db");
 const jwt = require("jsonwebtoken");
-const Resize = require("../models/Resize");
 
 require("dotenv").config();
 
@@ -77,20 +76,6 @@ class UserController {
 
             // upload.single("image");
             // call class Resize
-
-            const fileUpload = new Resize(imagePath);
-            if (!req.body.image) {
-                res.status(401).json({
-                    error: "Lỗi upload file ảnh",
-                    avarta: "",
-                });
-            }
-            const filename = await fileUpload.save(
-                req.body.image.buffer,
-                "avartar_1"
-            );
-
-            return res.status(200).json({ error: "", avarta: filename });
         }
     }
 }

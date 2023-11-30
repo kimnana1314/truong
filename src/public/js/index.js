@@ -431,7 +431,7 @@ $(document).ready(function () {
         <h3 class="toast__mess--titel">${toasts[status].titel} </h3>
         <p class="toast__mess--desc">${mess} </p>
        </div>   
-    </div>
+     </div>
     `;
 
         document.querySelector("#toasts").appendChild(toast);
@@ -722,7 +722,7 @@ $(document).ready(function () {
 
     // img__avarta
 
-    $("#files").change(function () {
+    $("#avrtar__image").change(function () {
         readURL(this);
     });
 
@@ -737,17 +737,29 @@ $(document).ready(function () {
         }
     }
     // btn_upload
+
+    function base64ToArrayBuffer(base64) {
+        var binaryString = atob(base64);
+        var bytes = new Uint8Array(binaryString.length);
+        for (var i = 0; i < binaryString.length; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+        return bytes.buffer;
+    }
+
     $("#btn_upload").on("click", function (e) {
         e.preventDefault();
         let avarta_img = getBase64Image(document.getElementById("img__avarta"));
-        alert(avarta_img);
+        let image = base64ToArrayBuffer(avarta_img.split("base64,")[1]);
+        alert(image);
         $.ajax({
             url: "/user/post",
             type: "POST",
             dataType: "json",
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            enctype: "multipart/form-data",
             data: {
-                image: avarta_img,
+                image: avarta_img.split("base64,")[1],
             },
             success: function (data, textStatus, jqXHR) {
                 if (data.Mess.length == 0) {
