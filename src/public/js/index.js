@@ -677,7 +677,6 @@ $(document).ready(function () {
         if (localStorage.getItem("Car_Qty")) {
             qty = Number(localStorage.getItem("Car_Qty"));
         } else {
-            localStorage.setItem("Car_Qty", 1);
             qty = 0;
         }
         if (qty <= 0) {
