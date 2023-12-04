@@ -189,13 +189,12 @@ async function PostUser_Love(User_Id, Item_Id, Love) {
     }
 }
 
-async function PostOrder(Json, User_Id) {
+async function PostOrder(Json) {
     try {
         let pool = await sql.connect(config.dbConfig);
         let User = await pool
             .request()
             .input("Json", sql.NVarChar, Json)
-            .input("User_Id", sql.VarChar, User_Id)
             .output("Mess", "")
             .output("Id", "")
             .execute("sp_Order_Play");
@@ -221,29 +220,27 @@ async function PostUser_AddCard(User_Id, Item_Id, Love) {
     }
 }
 
-async function get_Item_User(User_Id, Item_Id) {
+async function get_Item_User(Item_Id) {
     try {
         let pool = await sql.connect(config.dbConfig);
         let Items = await pool
             .request()
-            .input("User_Id", sql.VarChar, User_Id)
             .input("Item_Id", sql.VarChar, Item_Id)
             .execute("sp_Views_find");
-        return Items.recordsets;
+        return Items.recordset;
     } catch (error) {
         console.log(error);
     }
 }
 
-async function getOrderFind(User_Id, Tran_Num) {
+async function getOrderFind(Json) {
     try {
         let pool = await sql.connect(config.dbConfig);
         let Items = await pool
             .request()
-            .input("User_Id", sql.VarChar, User_Id)
-            .input("Tran_Num", sql.VarChar, Tran_Num)
+            .input("Json", sql.NVarChar, Json)
             .execute("sp_order_find");
-        return Items.recordsets;
+        return Items.recordset;
     } catch (error) {
         console.log(error);
     }

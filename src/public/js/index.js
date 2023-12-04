@@ -1,5 +1,13 @@
 // dang ky
+
 $(document).ready(function () {
+    if (localStorage.getItem("Car_Qty")) {
+        let qty = Number(localStorage.getItem("Car_Qty"));
+        $("#id_card_qty").text(qty);
+    } else {
+        $("#id_card_qty").text(0);
+    }
+
     $(function () {
         setInterval(function () {
             $(".slideshow__item > picture:first")
@@ -17,19 +25,19 @@ $(document).ready(function () {
     if (theme_main) {
         $("#Id_main").attr("class", theme_main);
         if (theme_main === "dark") {
-            $("#theme_st").attr("src", "./icons/toi.svg");
+            $("#theme_st").attr("src", "./icons/sang.svg");
             $("#Id_gd").text("Bật giao diện sáng");
             $("#Order_table").removeAttr("class");
             $("#Order_table").attr("class", "table table-hover table-dark");
         } else {
-            $("#theme_st").attr("src", "./icons/sang.svg");
+            $("#theme_st").attr("src", "./icons/toi.svg");
             $("#Id_gd").text("Bật giao diện tối");
             $("#Order_table").removeAttr("class");
             $("#Order_table").attr("class", "table table-hover");
         }
     } else {
         $("#Id_main").removeAttr("class");
-        $("#theme_st").attr("src", "./icons/sang.svg");
+        $("#theme_st").attr("src", "./icons/toi.svg");
         $("#Id_gd").text("Bật giao diện tối");
     }
     // đăng ký
@@ -281,30 +289,65 @@ $(document).ready(function () {
         );
     });
 
+    // btn_add_cardhome
+    $(".orderAdd-home").on("click", function (e) {
+        e.preventDefault();
+        let button = $(this).parent();
+        let Item_Id = button.prevObject.attr("data-item_id");
+        let CardHd = [];
+        if (localStorage.getItem("CardHd")) {
+            CardHd = JSON.parse(localStorage.getItem("CardHd"));
+        }
+        CardHd.push({
+            Item_Id: Item_Id,
+            Qty: 1,
+        });
+        if (localStorage.getItem("CardHd")) {
+            localStorage.setItem("CardHd", JSON.stringify(CardHd));
+        } else {
+            localStorage.setItem("CardHd", JSON.stringify(CardHd));
+        }
+        createToast("success", "Thêm vào giỏ hàng thành công");
+        if (localStorage.getItem("Car_Qty")) {
+            let qty = Number(localStorage.getItem("Car_Qty")) + 1;
+            localStorage.setItem("Car_Qty", qty);
+            $("#id_card_qty").text(qty);
+        } else {
+            localStorage.setItem("Car_Qty", 1);
+            $("#id_card_qty").text(1);
+        }
+    });
+
     //btn_add_card
     $("#btn_add_card").on("click", function (e) {
         e.preventDefault();
         let ArayItem_Id = location.href.split("/");
         let Item_Id = ArayItem_Id[ArayItem_Id.length - 1];
-        $.ajax({
-            url: "/addcard",
-            type: "POST",
-            dataType: "json",
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            data: {
-                Item_Id: Item_Id,
-            },
-            success: function (data, textStatus, jqXHR) {
-                if (data.Mess.length == 0) {
-                    createToast("success", "Thêm vào giỏ hàng thành công");
-                } else {
-                    createToast("warning", data.Mess);
-                }
-            },
-            error: function (xhr, status, error) {
-                createToast("error", xhr.responseText);
-            },
+
+        let CardHd = [];
+        if (localStorage.getItem("CardHd")) {
+            CardHd = JSON.parse(localStorage.getItem("CardHd"));
+        }
+        CardHd.push({
+            Item_Id: Item_Id,
+            Qty: 1,
         });
+
+        if (localStorage.getItem("CardHd")) {
+            localStorage.setItem("CardHd", JSON.stringify(CardHd));
+        } else {
+            localStorage.setItem("CardHd", JSON.stringify(CardHd));
+        }
+        createToast("success", "Thêm vào giỏ hàng thành công");
+
+        if (localStorage.getItem("Car_Qty")) {
+            let qty = Number(localStorage.getItem("Car_Qty")) + 1;
+            localStorage.setItem("Car_Qty", qty);
+            $("#id_card_qty").text(qty);
+        } else {
+            localStorage.setItem("Car_Qty", 1);
+            $("#id_card_qty").text(1);
+        }
     });
 
     // getcard: Cart_html
@@ -344,40 +387,40 @@ $(document).ready(function () {
         }
     });
 
-    $("#btn_card_item").mouseover(function () {
-        let Cart_html = $("input#Cart_html").val();
+    // $("#btn_card_item").mouseover(function () {
+    //     let Cart_html = $("input#Cart_html").val();
 
-        if (Cart_html) {
-            let cards = JSON.parse(Cart_html);
-            let list = $("#html_card_Item");
+    //     if (Cart_html) {
+    //         let cards = JSON.parse(Cart_html);
+    //         let list = $("#html_card_Item");
 
-            list.children().detach();
-            $.each(cards, function (index, value) {
-                let html = document.createElement("div");
-                html.className = `col`;
-                html.innerHTML = `<article class="cart-preview-item">
-                <div
-                    class="cart-preview-item__img-wrap"
-                >
-                    <img
-                        src="${value.Img}"
-                        alt=""
-                        class="cart-preview-item__thubm"
-                    />
-                </div>
+    //         list.children().detach();
+    //         $.each(cards, function (index, value) {
+    //             let html = document.createElement("div");
+    //             html.className = `col`;
+    //             html.innerHTML = `<article class="cart-preview-item">
+    //             <div
+    //                 class="cart-preview-item__img-wrap"
+    //             >
+    //                 <img
+    //                     src="${value.Img}"
+    //                     alt=""
+    //                     class="cart-preview-item__thubm"
+    //                 />
+    //             </div>
 
-                <h3
-                    class="cart-preview-item__title"
-                >${value.Item_Name}</h3>
-                <p
-                    class="cart-preview-item__price"
-                >${value.Price}</p>
-            </article> `;
+    //             <h3
+    //                 class="cart-preview-item__title"
+    //             >${value.Item_Name}</h3>
+    //             <p
+    //                 class="cart-preview-item__price"
+    //             >${value.Price}</p>
+    //         </article> `;
 
-                document.querySelector("#html_card_Item").appendChild(html);
-            });
-        }
-    });
+    //             document.querySelector("#html_card_Item").appendChild(html);
+    //         });
+    //     }
+    // });
 
     //toast_mess
 
@@ -445,26 +488,26 @@ $(document).ready(function () {
     }
 
     //giao diện sáng tối
-    $("#Id_theme").on("click", function (e) {
+    $("#btn_card_item_love").on("click", function (e) {
         let theme = localStorage.getItem("theme");
 
         if (theme) {
             if (theme === "dark") {
-                $("#theme_st").attr("src", "./icons/sang.svg");
+                $("#theme_st").attr("src", "./icons/toi.svg");
                 $("#Id_gd").text("Bật giao diện tối");
                 $("#Id_main").removeAttr("class");
                 localStorage.setItem("theme", "light");
             } else {
-                $("#theme_st").attr("src", "./icons/toi.svg");
+                $("#theme_st").attr("src", "./icons/sang.svg");
                 $("#Id_gd").text("Bật giao diện sáng");
                 $("#Id_main").attr("class", "dark");
                 localStorage.setItem("theme", "dark");
             }
         } else {
             $("#theme_st").attr("src", "./icons/toi.svg");
-            $("#Id_gd").text("Bật giao diện sáng");
-            $("#Id_main").attr("class", "dark");
-            localStorage.setItem("theme", "dark");
+            $("#Id_gd").text("Bật giao diện tối");
+            $("#Id_main").attr("class", "light");
+            localStorage.setItem("theme", "light");
         }
     });
 
@@ -626,15 +669,233 @@ $(document).ready(function () {
             $(Order_Item).remove();
         }
     });
+
+    // Order-views
+    $("#btn_card_item").on("click", function (e) {
+        e.preventDefault();
+        let qty;
+        if (localStorage.getItem("Car_Qty")) {
+            qty = Number(localStorage.getItem("Car_Qty"));
+        } else {
+            localStorage.setItem("Car_Qty", 1);
+            qty = 0;
+        }
+        if (qty <= 0) {
+            return;
+        }
+
+        let CardHd = [];
+        if (localStorage.getItem("CardHd")) {
+            CardHd = JSON.parse(localStorage.getItem("CardHd"));
+        }
+
+        if (CardHd.length == 0) {
+            createToast("warning", "Chưa có sản phẩm nào ở giỏ hàng");
+            return;
+        }
+
+        let Obj_Items = {
+            Trans: CardHd,
+        };
+        var html_str;
+        $.ajax({
+            type: "GET",
+            url: "/order/",
+            dataType: "json",
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            headers: {
+                header1: JSON.stringify(Obj_Items),
+            },
+            success: function (data) {
+                html_str = `<div class="order-container">
+                <div  class="order-from">
+            
+                    <div class="order-from__group">
+                        <h2 class="order-from__group--title">1.Người nhận</h2>
+                        <div class="order-from__Items">
+            
+                             
+                            <input
+                                class="order-from__Items--text"
+                                type="text"
+                                id="Ascendant"
+                                name="Ascendant"
+                                placeholder="Tên người nhận"
+                                value=""
+                            />
+                        </div>
+                        <div class="order-from__Items">
+            
+                             
+                            <input
+                                class="order-from__Items--text"
+                                type="text"
+                                id="Adress"
+                                name="Adress"
+                                placeholder="Địa chỉ"
+                                value=""
+                            />
+                        </div>
+            
+                        <div class="order-from__Items">
+            
+                             
+                            <input
+                                class="order-from__Items--text"
+                                type="text"
+                                id="Phone"
+                                name="Phone"
+                                placeholder="Điện thoại"
+                                value=""
+                            />
+                        </div>
+            
+                    </div>
+                    <div class="order-from__Items">
+                        <h2 class="order-from__group--title">2.Danh sách sản phẩm</h2>
+                        <div class="row row-cols-2 row-cols-lg-1">
+                           `;
+                $.each(data.Items, (key, value) => {
+                    html_str += ` 
+                    <div id="Order_${value.Item_Id}" class="col">
+                        <article class="order-card">
+                            <picture class="order-card__img">
+                                <img
+                                    src="${value.Img}"
+                                    alt=""
+                                    class="order-card__thumb"
+                                />
+                            </picture>
+
+                            <div class="order-card__info">
+                                <div class="order-card__info--heading">
+                                    <h3 class="order-card__info--title">
+                                        ${value.Item_Name}</h3>
+                                    <p
+                                        class="order-card__info--amt"
+                                        id="Order_Amt_${value.Item_Id}"
+                                    >
+                                        ${value.Item_Amt}</p>
+                                </div>
+                                <p
+                                    class="order-card__info--price"
+                                    id="Order_Price_${value.Item_Id}"
+                                    name="Order_Price"
+                                >
+                                    ${value.Price}
+                                </p>
+                                <div class="order-card__act">
+                                    <div
+                                        class="order-card__act--btn prevent-select"
+                                    >
+                                        <button
+                                            class="orderRemove"
+                                            data-item_id="${value.Item_Id}"
+                                        >
+                                            <img
+                                                src="./icons/remove.svg"
+                                                alt=""
+                                                class="icon"
+                                            />
+                                        </button>
+
+                                        <input
+                                            type="number"
+                                            id="Qty_${value.Item_Id}"
+                                            name="Order_Qty"
+                                            value="${value.Qty}"
+                                            disabled="true"
+                                            min="1"
+                                            class="order-card__act--qty"
+                                            data-item_id="${value.Item_Id}"
+                                        />
+                                        <button
+                                            class="orderAdd"
+                                            data-item_id="${value.Item_Id}"
+                                        >
+                                            <img
+                                                src="./icons/add.svg"
+                                                alt=""
+                                                class="icon"
+                                            />
+                                        </button>
+
+                                    </div>
+                                    <button
+                                        class="btn btn--outline orderDelete"
+                                        data-item_id="${value.Item_Id}"
+                                    >
+                                        <img
+                                            src="./icons/delete.svg"
+                                            alt=""
+                                            class="icon"
+                                        />
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </article>
+                    </div>
+              `;
+                });
+                html_str += `                        </div>
+                <div class="row row-cols-1">
+                    <div class="order-from__total">
+                        <div class="order-from__amt">
+                            <span>
+                                <img src="./icons/money.svg" alt="" class="icon" />
+                            </span>
+    
+                            <p
+                                id="Order_money"
+                                class="order-from__amt--total"
+
+                            > `;
+
+                $.each(data, (key, value) => {
+                    html_str += `${value[0].Total_Amt}`;
+                });
+
+                html_str += `</p>
+    
+                        </div>
+    
+                        <button id="OrderItemPay" class="btn btn--primary">Đặt hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>`;
+
+                $("#container_body").html(html_str);
+                var jQueryScript = document.createElement("script");
+                jQueryScript.setAttribute("src", "js/index.js");
+                document.head.appendChild(jQueryScript);
+
+                //JSON.stringify(data)
+                // alert(data);
+
+                // if (data.Mess.length > 0) {
+                //     createToast("warning", data.Mess);
+                // } else {
+                //     createToast("success", "Đăng ký đặt hàng thành công!");
+                // }
+            },
+            error: function (xhr, status, error) {
+                alert(error);
+
+                createToast("error", status + xhr.responseText);
+            },
+        });
+    });
+
     // OrderItemPay
     $("#OrderItemPay").on("click", function (e) {
         e.preventDefault();
-        let Url = location.href;
-        let ArayTran_Num = location.href.split("/");
-        let Tran_Num = ArayTran_Num[ArayTran_Num.length - 1];
 
         let Tran_Card = {
-            Tran_Num: Tran_Num,
             Ascendant: $("#Ascendant").val().trim(),
             Adress: $("#Adress").val().trim(),
             Phone: $("#Phone").val().trim(),
@@ -664,7 +925,7 @@ $(document).ready(function () {
         }
 
         if (Trans.length == 0) {
-            createToast("warning", "Chưa có sản phẩm nào ở đơn hàng");
+            createToast("warning", "Chưa có sản phẩm nào ở giỏ hàng");
             return;
         }
 
@@ -674,7 +935,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: Url,
+            url: "/order",
             type: "POST",
             dataType: "json",
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -684,6 +945,11 @@ $(document).ready(function () {
                     createToast("warning", data.Mess);
                 } else {
                     createToast("success", "Đăng ký đặt hàng thành công!");
+                    localStorage.removeItem("Car_Qty");
+                    localStorage.removeItem("CardHd");
+                    setTimeout(() => {
+                        window.location = "/";
+                    }, 2000);
                 }
             },
             error: function (xhr, status, error) {
@@ -691,7 +957,6 @@ $(document).ready(function () {
             },
         });
     });
-
     // profile-user
 
     let modal = $(".profile__model");

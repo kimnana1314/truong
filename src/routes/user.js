@@ -35,10 +35,6 @@ router.post("/post", upload.single("avrtar__image"), async function (req, res) {
         return res.redirect("/user");
     }
 
-    console.log("---------------------");
-    console.log("---------------------", req.file);
-    console.log("---------------------");
-
     let img = req.file.originalname.split(".");
     let img_file = img[img.length - 1];
 

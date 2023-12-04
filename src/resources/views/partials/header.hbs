@@ -1,28 +1,205 @@
 <div class="container">
+
     <div class="top-bar">
-        <!-- more -->
-        <button class="top-bar__more d-none js-toggle" toggle-target="#navbar">
+        <label for="menu-checkbox" class="d-none">
+            {{! <button class="top-bar__more d-none d-md-block"> }}
             <img
                 src="./icons/more.svg"
                 alt=""
-                class="icon top-bar__more-icon"
+                class="top-bar__more icon top-bar__more-icon"
             />
-        </button>
-
+            {{! </button> }}
+        </label>
         <!-- logi -->
         <a href="/" class="logo">
             <img src="./icons/logo.svg" alt="P-EMIC" class="logo__img" />
             <h1 class="logo__title">P-EMIC</h1>
         </a>
 
-        <div class="navbar--overlay js-toggle" toggle-target="#navbar"></div>
+        <input
+            type="checkbox"
+            name=""
+            id="menu-checkbox"
+            class="menu-checkbox"
+            hidden
+        />
+        <!-- more -->
+
+        <label for="menu-checkbox" class="navbar--overlay"></label>
+        <!-- nabar -->
+        <nav id="navbar" class="navbar">
+
+            <label for="menu-checkbox">
+
+                <img
+                    src="./icons/arrow-left.svg"
+                    alt=""
+                    class="icon navbar__close-btn d-none d-md-block"
+                />
+
+            </label>
+            <a href="/OrderAll" class="nav-btn d-none d-md-flex">
+                <img src="./icons/buy.svg" alt="" class="icon nav-btn__icon" />
+                <span class="nav-btn__title">Card</span>
+                <span class="nav-btn__qty">{{Amt_Card}}</span>
+            </a>
+            <a href="/favorite-product" class="nav-btn d-none d-md-flex">
+                <img
+                    src="./icons/heart.svg"
+                    alt=""
+                    class="icon nav-btn__icon"
+                />
+                <span class="nav-btn__title">Favorite</span>
+                <span class="nav-btn__qty">{{Qty_Love}}</span>
+            </a>
+
+        </nav>
+
         <!-- actions -->
         <div class="top-act">
-            <a href="/log-in" class="btn btn--text prevent-select">Đăng nhập</a>
-            <a
-                href="/register"
-                class="btn btn--primary top-act__sign-up prevent-select"
-            >Đăng ký</a>
+
+            <div class="top-act__group">
+                <div class="top-act__btn-wrap">
+                    <button id="btn_card_item_love" class="top-act__btn">
+
+                        <span
+                            class="profile-menu__icon profile-menu__icon--left"
+                        >
+                            <img
+                                id="theme_st"
+                                src="./icons/toi.svg"
+                                alt=""
+                                class="icon"
+                            />
+                        </span>
+                        <span id="Id_gd" class="profile-menu__desc">
+                            Bật giao diện tối</span>
+
+                    </button>
+                    {{! dropdown }}
+                    <div class="act-dropdown">
+                        <div class="act-dropdown__inner">
+                            <img
+                                src="./icons/arrow-up.svg"
+                                alt=""
+                                class="act-dropdown__arrow"
+                            />
+                            <div class="act-dropdown__top">
+                                <h2 class="act-dropdown__title">Sản phẩm yêu
+                                    thích</h2>
+                                <input
+                                    type="text"
+                                    id="Cart_html_love"
+                                    value="{{Trans_love}}"
+                                    hidden
+                                />
+
+                            </div>
+                            <div
+                                id="html_card_Item_love"
+                                class="row row-cols-3 gx-2 act-dropdown__list"
+                            >
+
+                            </div>
+
+                            <div
+                                class="act-dropdown__checkout act-dropdown__checkout-btn"
+                            >
+
+                                <a
+                                    href="/favorite-product"
+                                    class="btn btn--primary act-dropdown__checkout-btn btn--rounded"
+                                >Sản phẩm yêu thích</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="top-act__separate"></div>
+                <div class="top-act__btn-wrap">
+                    <button id="btn_card_item" class="top-act__btn">
+                        <img
+                            src="./icons/buy.svg"
+                            alt=""
+                            class="icon top-act__icon"
+                        />
+                        <span id="id_card_qty" class="top-act__title">0</span>
+
+                    </button>
+                    {{! dropdown }}
+                    <div class="act-dropdown">
+                        <div class="act-dropdown__inner">
+                            <img
+                                src="./icons/arrow-up.svg"
+                                alt=""
+                                class="act-dropdown__arrow"
+                            />
+                            <div class="act-dropdown__top">
+                                <h2 class="act-dropdown__title">Đơn hàng mới
+                                    nhất</h2>
+                                <input
+                                    type="text"
+                                    id="Cart_html"
+                                    value="{{Trans}}"
+                                    hidden
+                                />
+
+                            </div>
+                            <div
+                                id="html_card_Item"
+                                class="row row-cols-3 gx-2 act-dropdown__list"
+                            >
+
+                            </div>
+                            <div class="act-dropdown__bottom">
+                                <div class="act-dropdown__row">
+                                    <span
+                                        class="act-dropdown__label"
+                                    >Tổng:</span>
+                                    <span
+                                        class="act-dropdown__value"
+                                    >{{Amt}}</span>
+                                </div>
+                                <div class="act-dropdown__row">
+                                    <span class="act-dropdown__label">Phí vận
+                                        chuyển:</span>
+                                    <span
+                                        class="act-dropdown__value"
+                                    >{{Ship_Amt}}</span>
+                                </div>
+                                <div
+                                    class="act-dropdown__row act-dropdown__row--bold"
+                                >
+                                    <span class="act-dropdown__label">Tổng đơn
+                                        hàng:</span>
+                                    <span
+                                        class="act-dropdown__value"
+                                    >{{Amt_Card}}</span>
+                                </div>
+                            </div>
+                            <div
+                                class="act-dropdown__checkout act-dropdown__checkout-btn"
+                            >
+                                <a
+                                    id="orderViewAll"
+                                    href="/orderAll"
+                                    class="act-dropdown__view-all"
+                                >
+                                    Tất cả đơn hàng
+                                </a>
+
+                                <a
+                                    href="/order/{{Tran_Num}}"
+                                    class="{{css_trans}}"
+                                >
+                                    Đặt hàng
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>

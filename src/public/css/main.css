@@ -236,7 +236,7 @@ input[type=number] {
   width: 400px;
   height: 82px;
   border-radius: 99px;
-  border: 1px solid var(--bg-border-toast);
+  border: 1.5px solid var(--bg-border-toast);
   overflow: hidden;
 }
 .toast__mess--heading {
@@ -2107,16 +2107,8 @@ html.dark {
   background: var(--top-act-group-bg-color);
   box-shadow: 0px 20px 60px 10px var(--top-act-group-shadow);
 }
-@media (max-width: 767.98px) {
-  .top-act__group {
-    display: none;
-  }
-}
 .top-act__btn-wrap {
   position: relative;
-}
-.top-act__btn-wrap:hover .act-dropdown {
-  display: block;
 }
 .top-act__btn {
   gap: 10px;
@@ -2513,6 +2505,11 @@ footer {
   .logo__title {
     font-size: 1.8rem;
     line-height: 144.444%;
+  }
+}
+@media (max-width: 767.98px) {
+  .logo__title {
+    display: none;
   }
 }
 .logo__img {

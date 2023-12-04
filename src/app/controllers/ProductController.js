@@ -15,30 +15,11 @@ const verifyToken = (token) => {
 class ProductController {
     // Get /news
     show(req, res, next) {
-        const cookies = req.cookies;
-        let User_Id = null;
-        let decoded = verifyToken(cookies.token);
-        if (decoded) {
-            User_Id = decoded.Id;
-        }
-
-        if (User_Id) {
-            db.get_Item_User(User_Id, req.params.Item_Id)
-                .then((Items) => {
-                    res.render("product", {
-                        Items: Items[0],
-                        Card: Items[1],
-                        layout: "main-logined",
-                    });
-                })
-                .catch(next);
-        } else {
-            db.get_Item_User("0", req.params.Item_Id)
-                .then((Items) => {
-                    res.render("product", { Items: Items[0], Card: Items[1] });
-                })
-                .catch(next);
-        }
+        db.get_Item_User(req.params.Item_Id)
+            .then((Items) => {
+                res.render("product", { Items });
+            })
+            .catch(next);
     }
     Post_love(req, res, next) {
         const cookies = req.cookies;

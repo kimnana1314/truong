@@ -27,8 +27,8 @@ function route(app) {
     app.use("/exit", exitsRouter);
     app.use("/branch", branchdRouter);
     app.use("/favorite-product", middlewares, favoriteProductRouter);
-    app.use("/order", middlewares, orderRouter);
-    app.use("/orderAll", middlewares, orderAllRouter);
+    app.use("/order", orderRouter);
+    app.use("/orderAll", orderAllRouter);
     app.use("/", homeRouter);
 }
 

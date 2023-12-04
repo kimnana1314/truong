@@ -148,15 +148,16 @@
         border-radius: 8px;
         background: var(--top-act-group-bg-color);
         box-shadow: 0px 20px 60px 10px var(--top-act-group-shadow);
-        @include abstracts.screen(md) {
-            display: none;
-        }
+        // @include abstracts.screen(md) {
+        //     display: none;
+        // }
     }
+
     &__btn-wrap {
         position: relative;
-        &:hover .act-dropdown {
-            display: block;
-        }
+        // &:hover .act-dropdown {
+        //     // display: block;
+        // }
     }
     &__btn {
         @extend %flexItemCenter;

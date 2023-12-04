@@ -25,7 +25,7 @@ app.engine(
     handlebars.engine({
         extname: ".hbs",
         helpers: {
-            sumAmt: (a) => a[0].Total_Amt,
+            sumAmt: (a) => a.Total_Amt,
         },
     })
 );
@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/user/post", express.static(path.join(__dirname, "public")));
 app.use("/product", express.static(path.join(__dirname, "public")));
 app.use("/order", express.static(path.join(__dirname, "public")));
+app.use("/order/", express.static(path.join(__dirname, "public")));
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources", "views"));
 app.set("view options", { layout: "main-auth" });
@@ -42,26 +43,26 @@ app.use(cookieParser());
 
 route(app);
 
-// const options = {
-//     key: fs.readFileSync("server.key"),
-//     cert: fs.readFileSync("server.cert"),
-// };
+const options = {
+    key: fs.readFileSync("server.key"),
+    cert: fs.readFileSync("server.crt"),
+};
 
-var privateKey = fs.readFileSync("server.key", "utf8");
-var certificate = fs.readFileSync("server.crt", "utf8");
+// var privateKey = fs.readFileSync("server.key", "utf8");
+// var certificate = fs.readFileSync("server.crt", "utf8");
 
-var credentials = { key: privateKey, cert: certificate };
+// var credentials = { key: privateKey, cert: certificate };
 
-https.createServer(credentials, app).listen(port, function (req, res) {
-    console.log("Server started at port :", port);
-});
+// https.createServer(credentials, app).listen(port, function (req, res) {
+//     console.log("Server started at port :", port);
+// });
 
 // console.log("---------------------");
 // console.log(options);
 // console.log("---------------------");
-// https.createServer(options, app).listen(port, function (req, res) {
-//     console.log("Server started at port :", port);
-// });
+https.createServer(options, app).listen(port, function (req, res) {
+    console.log("Server started at port :", port);
+});
 
 // app.listen(port, () => {
 //     console.log(`App listening on port http://localhost:` + process.env.PORT);

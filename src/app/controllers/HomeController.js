@@ -30,7 +30,7 @@ class HomeController {
                     res.render("home", {
                         Items: Items[0],
                         Card: Items[1],
-                        layout: "main-logined",
+                        // layout: "main-logined",
                     });
                 })
                 .catch(next);

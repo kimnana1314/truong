@@ -17,6 +17,9 @@
             font-size: 1.8rem;
             line-height: 144.444%;
         }
+        @include abstracts.screen(md) {
+            display: none;
+        }
     }
 
     &__img {
