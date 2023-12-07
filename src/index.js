@@ -35,6 +35,7 @@ app.use("/user/post", express.static(path.join(__dirname, "public")));
 app.use("/product", express.static(path.join(__dirname, "public")));
 app.use("/order", express.static(path.join(__dirname, "public")));
 app.use("/order/", express.static(path.join(__dirname, "public")));
+
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources", "views"));
 app.set("view options", { layout: "main-auth" });
