@@ -1,0 +1,196 @@
+<style>
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none; margin: 0; } input[type=number] { -moz-appearance:
+    textfield; }
+</style>
+<form>
+    <h3>Thêm mới sản phẩm</h3>
+    <div class="row g-3">
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Item_Id"
+                    name="Item_Id"
+                />
+                <label for="Item_Id">Mã hàng hóa</label>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Item_Name"
+                    name="Item_Name"
+                />
+                <label for="Item_Name">Tên hàng hóa</label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+
+                <input
+                    type="number"
+                    class="form-control"
+                    id="Price"
+                    name="Price"
+                    min="1000"
+                    aria-label="Amount (to the nearest dollar)"
+                />
+
+                <label for="Price">Đơn giá</label>
+            </div>
+        </div>
+    </div>
+    <div class="row g-5">
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Size_M"
+                    name="Size_M"
+                />
+                <label for="Size_M">Kích thước</label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Weigth_M"
+                    name="Weigth_M"
+                />
+                <label for="Weigth_M">Trọng lượng máy</label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Size_D"
+                    name="Size_D"
+                />
+                <label for="Size_D">Size đá</label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Quantity"
+                    name="Quantity"
+                />
+                <label for="Quantity">Sản lượng</label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Container_Valume"
+                    name="Container_Valume"
+                />
+                <label for="Container_Valume">Thể tích thùng chứa</label>
+            </div>
+        </div>
+    </div>
+    <div class="row g-5">
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Voltage"
+                    name="Voltage"
+                />
+                <label for="Voltage">Điện áp</label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Wattage"
+                    name="Wattage"
+                />
+                <label for="Wattage">Công suất</label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Cryogenics"
+                    name="Cryogenics"
+                />
+                <label for="Cryogenics">Chất làm lạnh</label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Cooling_Sys"
+                    name="Cooling_Sys"
+                />
+                <label for="Cooling_Sys">Hệ thống làm lạnh</label>
+            </div>
+        </div>
+        <div class="col-lg">
+            <div class="form-floating mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    id="Qty_Batch"
+                    name="Qty_Batch"
+                />
+                <label for="Qty_Batch">Số viên đá/mẻ</label>
+            </div>
+
+        </div>
+        <div id="email_err" class="form-text" style="color: red;">
+        </div>
+    </div>
+    <button id="btn_NewItems" class="btn btn-primary mt-3"> Lưu </button>
+</form>
+<script>
+    $(document).ready(function () { $("#btn_NewItems").on("click", function (e)
+    { e.preventDefault(); $("#email_err").html(``); if
+    ($("#Item_Id").val().trim().length === 0) { $("#email_err").html(`Phải nhập
+    mã hàng`); return; } if ($("#Item_Name").val().length === 0) {
+    $("#email_err").html(`Phải nhập tên hàng hóa`); return; } if
+    ($("#Price").val().length === 0) { $("#email_err").html(`Phải nhập đơn
+    giá`); return; } if ($("#Size_M").val().length === 0) {
+    $("#email_err").html(`Phải nhập kính thước`); return; } if
+    ($("#Weigth_M").val().length === 0) { $("#email_err").html(`Phải nhập trọng
+    lượng máy`); return; } if ($("#Size_D").val().length === 0) {
+    $("#email_err").html(`Phải nhập size đá`); return; } if
+    ($("#Quantity").val().length === 0) { $("#email_err").html(`Phải nhập sảng
+    lượng`); return; } if ($("#Container_Valume").val().length === 0) {
+    $("#email_err").html(`Phải nhập thể tích thùng chứa`); return; } if
+    ($("#Voltage").val().length === 0) { $("#email_err").html(`Phải nhập điện
+    áp`); return; } if ($("#Wattage").val().length === 0) {
+    $("#email_err").html(`Phải nhập công suất`); return; } if
+    ($("#Cryogenics").val().length === 0) { $("#email_err").html(`Phải nhập chất
+    làm lạnh`); return; } if ($("#Cooling_Sys").val().length === 0) {
+    $("#email_err").html(`Phải nhập hệ thống làm lạnh`); return; } if
+    ($("#Qty_Batch").val().length === 0) { $("#email_err").html(`Phải nhập số
+    viên đá/mẻ`); return; } var url = "/products/New"; var settings = { data:
+    $("form").serialize(), method: "POST", statusCode: {}, success: function
+    (data, textStatus, jqXHR) { if (data.Mess.length > 0) {
+    $("#email_err").html(data.Mess); } else { window.location.href =
+    "/products"; } }, error: function (jqXHR, textStatus, errorThrown) {
+    $("#email_err").html(jqXHR.responseText); }, }; $.ajax(url, settings); });
+    });
+
+</script>

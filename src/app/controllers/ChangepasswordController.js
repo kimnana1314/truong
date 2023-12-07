@@ -27,7 +27,6 @@ class ChangepasswordController {
             .then((Items) => {
                 res.render("changepassword", {
                     Items: Items[0],
-                    Card: Items[1],
                     layout: "main-logined",
                 });
             })

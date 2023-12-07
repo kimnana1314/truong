@@ -1,111 +1,80 @@
 <main class="auth">
-
     <div class="auth__content">
         <div class="auth__content-inner">
-            <a href="/" class="logo">
-                <img src="./icons/logo.svg" alt="P-EMIC" class="logo__img" />
-                <h1 class="logo__title">P-EMIC</h1>
-            </a>
-            <h1 class="auth__heading">Đăng ký</h1>
-            <p class="auth__desc">Hãy tạo tài khoản của bạn và mua sắm như một
-                người chuyên nghiệp và tiết kiệm tiền.</p>
-            <form action="" class="form auth__form" id="Frm_dangky">
-                <div class="form__group">
-                    <div class="form__text-input">
-                        <input
-                            type="email"
-                            name="User_Email"
-                            id="User_Email"
-                            placeholder="Email"
-                            class="form__input"
-                            required
-                        />
-                        <img
-                            src="./icons/email.svg"
-                            alt=""
-                            class="form__input-icon icon"
-                        />
-                        <img
-                            src="./icons/form-error.svg"
-                            alt=""
-                            class="form__input-icon--error"
-                        />
-                    </div>
-                    <p class="form__error" id="err_email">Email không đúng định
-                        dạng</p>
-                </div>
-                <div class="form__group">
-                    <div class="form__text-input">
-                        <input
-                            type="password"
-                            name="User_Password"
-                            id="User_Password"
-                            placeholder="Password"
-                            class="form__input"
-                            required
-                            minlength="6"
-                        />
-                        <img
-                            src="./icons/key.svg"
-                            alt=""
-                            class="form__input-icon icon"
-                        />
-                        <img
-                            src="./icons/form-error.svg"
-                            alt=""
-                            class="form__input-icon--error"
-                        />
-                    </div>
-                    <p class="form__error" id="err_pas">Mật khẩu tối thiểu 6 ký
-                        tự</p>
-                </div>
 
-                <div class="form__group">
-                    <div class="form__text-input">
-                        <input
-                            type="password"
-                            name="User_PasswordConfirm"
-                            id="User_PasswordConfirm"
-                            placeholder="Confirm Password"
-                            class="form__input"
-                            required
-                            minlength="6"
-                        />
-                        <img
-                            src="./icons/key.svg"
-                            alt=""
-                            class="form__input-icon icon"
-                        />
-                        <img
-                            src="./icons/form-error.svg"
-                            alt=""
-                            class="form__input-icon--error"
-                        />
-                    </div>
-                    <p class="form__error">Mật khẩu tối thiểu 6 ký tự</p>
+            <h3>Đăng ký</h3>
+
+            <form>
+                <div class="mb-3">
+                    <label
+                        for="exampleInputEmail1"
+                        class="form-label"
+                    >Email</label>
+                    <input
+                        type="email"
+                        class="form-control"
+                        id="User_Email"
+                        name="User_Email"
+                        aria-describedby="emailHelp"
+                    />
 
                 </div>
-                <div class="form__group form__group--inline">
-
-                    <a href="/reset-password" class="auth__link">Khôi phục mật
-                        khẩu</a>
-                    <p class="form__mess form__mess--err" id="output">
-                    </p>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Mật
+                        khẩu</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="User_Password"
+                        name="User_Password"
+                    />
                 </div>
-                <div class="form__group auth__btn-group">
-                    <button
-                        type="submit"
-                        id="btn_dangky"
-                        class="btn btn--primary form__submit-btn"
-                    >Đăng ký</button>
 
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Mật
+                        khẩu xác nhận</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="User_PasswordConfirm"
+                        name="User_PasswordConfirm"
+                    />
+                    <div
+                        id="email_err"
+                        class="form-text"
+                        style="color: red;"
+                    ></div>
+                    <div
+                        id="email_done"
+                        class="form-text"
+                        style="color: green;"
+                    ></div>
                 </div>
+
+                <button id="btn_dangky" class="btn btn-primary">Đăng ký</button>
+
             </form>
-            <div class="auth__act">
-                <p class="auth__text">Bạn đã có tài khoản chưa?</p>
-                <a href="/log-in" class="auth__link"> Đăng nhập</a>
-            </div>
+
         </div>
     </div>
 
 </main>
+<script>
+    $(document).ready(function () { function IsEmail(email) { var regex =
+    /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/; if
+    (!regex.test(email)) { return false; } else { return true; } }
+    $("#btn_dangky").on("click", function (e) { e.preventDefault();
+    $("#email_err").html(``); $("#email_done").html(``); if
+    (!IsEmail($("#User_Email").val())) { $("#email_err").html(`Email không hợp
+    lệ`); return; } if ($("#User_Password").val().length<6) {
+    $("#email_err").html(`Mật khẩu ít nhất 6 ký tự`); return; } if
+    ($("#User_Password").val() !=$("#User_PasswordConfirm").val()) {
+    $("#email_err").html(`Mật khẩu xác nhận không đúng`); return; } var url =
+    "/register"; var settings = { data: $("form").serialize(), method: "POST",
+    statusCode: {}, success: function (data, textStatus, jqXHR) { if
+    (data.Mess.length > 0) { $("#email_err").html(data.Mess) ; } else {
+    $("#email_done").html( `Đăng ký tài khoản thành công vào hòm thư để active
+    tài khoản!` ); } }, error: function (jqXHR, textStatus, errorThrown) {
+    $("#email_err").html(jqXHR.responseText); }, }; $.ajax(url, settings); });
+    });
+</script>

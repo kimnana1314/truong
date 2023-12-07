@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 class RegisterController {
     // Get /news
     register(req, res, next) {
-        res.render("register", { layout: "main-auth" });
+        res.render("register", { layout: "main-logined" });
     }
 
     async store(req, res, next) {

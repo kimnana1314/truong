@@ -26,13 +26,10 @@ async function getItem(Item_Id) {
     }
 }
 
-async function getItemUser(User_Id) {
+async function getItemUser() {
     try {
         let pool = await sql.connect(config.dbConfig);
-        let Items = await pool
-            .request()
-            .input("User_Id", sql.VarChar, User_Id)
-            .execute("sp_view_items_User");
+        let Items = await pool.request().execute("sp_view_items_User");
         return Items.recordsets;
     } catch (error) {
         console.log(error);
@@ -55,6 +52,65 @@ async function UserRegister(User_Json) {
         console.log(error);
     }
 }
+
+async function BarchNew(User_Json, dk) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let User = await pool
+            .request()
+            .input("json", sql.NVarChar, User_Json)
+            .input("dk", sql.Int, dk)
+            .output("Mess", "")
+            .execute("sp_Barch_New");
+        return User.output;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function Item_UpdateImg(User_Json) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let User = await pool
+            .request()
+            .input("json", sql.NVarChar, User_Json)
+            .output("Mess", "")
+            .execute("sp_Items_UpdateImg");
+        return User.output;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function Items_Update(User_Json, dk) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let User = await pool
+            .request()
+            .input("json", sql.NVarChar, User_Json)
+            .input("dk", sql.Int, dk)
+            .output("Mess", "")
+            .execute("sp_Items_Edit");
+        return User.output;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function Company_Update(User_Json) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let User = await pool
+            .request()
+            .input("json", sql.NVarChar, User_Json)
+            .output("Mess", "")
+            .execute("sp_Company_Update");
+        return User.output;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function UserAvartaUpdate(User_Id, User_Avarta) {
     try {
         let pool = await sql.connect(config.dbConfig);
@@ -64,6 +120,21 @@ async function UserAvartaUpdate(User_Id, User_Avarta) {
             .input("User_Avarta", sql.NVarChar, User_Avarta)
             .output("Mess", "")
             .execute("sp_profile_user_update_Avarta");
+        return User.output;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function UserImgBrach(Br_Id, Br_Img) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let User = await pool
+            .request()
+            .input("Br_Id", sql.VarChar, Br_Id)
+            .input("Br_Img", sql.NVarChar, Br_Img)
+            .output("Mess", "")
+            .execute("sp_Img_BrachUpdate");
         return User.output;
     } catch (error) {
         console.log(error);
@@ -246,13 +317,28 @@ async function getOrderFind(Json) {
     }
 }
 
-async function getOrderAllFind(User_Id) {
+async function getOrderAllFind(Status, Dk, Seach) {
     try {
         let pool = await sql.connect(config.dbConfig);
         let Items = await pool
             .request()
-            .input("User_Id", sql.VarChar, User_Id)
-            .execute("sp_view_OrderAll");
+            .input("Status", sql.VarChar, Status)
+            .input("Dk", sql.VarChar, Dk)
+            .input("Seach", sql.NVarChar, Seach)
+            .execute("sp_view_OrderSeach");
+        return Items.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getOrderViews(Tran_Num) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let Items = await pool
+            .request()
+            .input("Tran_Num", sql.VarChar, Tran_Num)
+            .execute("sp_view_Order_views");
         return Items.recordsets;
     } catch (error) {
         console.log(error);
@@ -292,6 +378,16 @@ async function getprofile_user(User_Id) {
             .request()
             .input("User_Id", sql.VarChar, User_Id)
             .execute("sp_profile_user");
+        return Items.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function company() {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let Items = await pool.request().execute("sp_company");
         return Items.recordsets;
     } catch (error) {
         console.log(error);
@@ -386,6 +482,19 @@ async function getBranch() {
     }
 }
 
+async function getBranchFind(Br_Id) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let Items = await pool
+            .request()
+            .input("Br_Id", sql.VarChar, Br_Id)
+            .execute("sp_Branch_Find");
+        return Items.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function getBranchUser(User_Id) {
     try {
         let pool = await sql.connect(config.dbConfig);
@@ -394,6 +503,21 @@ async function getBranchUser(User_Id) {
             .input("User_Id", sql.VarChar, User_Id)
             .execute("sp_view_Branch_User");
         return Items.recordsets;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function Order_Handle(json, Dk, Love) {
+    try {
+        let pool = await sql.connect(config.dbConfig);
+        let order = await pool
+            .request()
+            .input("json", sql.NVarChar, json)
+            .input("Dk", sql.VarChar, Dk)
+            .output("Mess", "")
+            .execute("sp_Order_Handle");
+        return order.output;
     } catch (error) {
         console.log(error);
     }
@@ -424,4 +548,13 @@ module.exports = {
     FavoriteProduct: FavoriteProduct,
     getOrderAllFind: getOrderAllFind,
     UserAvartaUpdate: UserAvartaUpdate,
+    company: company,
+    Company_Update: Company_Update,
+    BarchNew: BarchNew,
+    getBranchFind: getBranchFind,
+    UserImgBrach: UserImgBrach,
+    Items_Update: Items_Update,
+    Item_UpdateImg: Item_UpdateImg,
+    getOrderViews: getOrderViews,
+    Order_Handle: Order_Handle,
 };

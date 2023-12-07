@@ -1,28 +1,90 @@
 <div class="container">
-    <div class="top-bar">
-        <!-- more -->
-        <button class="top-bar__more d-none js-toggle" toggle-target="#navbar">
-            <img
-                src="./icons/more.svg"
-                alt=""
-                class="icon top-bar__more-icon"
-            />
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/orderAll">Quản lý</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDarkDropdown"
+                aria-controls="navbarNavDarkDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDarkDropdownMenuLink"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Người dùng
+                        </a>
+                        <ul
+                            class="dropdown-menu dropdown-menu-dark"
+                            aria-labelledby="navbarDarkDropdownMenuLink"
+                        >
+                            <li><a class="dropdown-item" href="/register">Đăng
+                                    ký người dùng</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a
+                                    class="dropdown-item"
+                                    href="/reset-password"
+                                >Lấy lại mật khẩu</a></li>
 
-        <!-- logi -->
-        <a href="/" class="logo">
-            <img src="./icons/logo.svg" alt="P-EMIC" class="logo__img" />
-            <h1 class="logo__title">P-EMIC</h1>
-        </a>
+                            <li><a
+                                    class="dropdown-item"
+                                    href="/changepassword"
+                                >Thay đổi mật khẩu</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><button
+                                    id="Id_Exit"
+                                    class="dropdown-item"
+                                >Thoát</button></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarDarkDropdownMenuLink"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Danh mục
+                        </a>
+                        <ul
+                            class="dropdown-menu dropdown-menu-dark"
+                            aria-labelledby="navbarDarkDropdownMenuLink"
+                        >
+                            <li><a class="dropdown-item" href="/products">Sản
+                                    phẩm</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="/cn">Chi nhánh</a></li>
 
-        <div class="navbar--overlay js-toggle" toggle-target="#navbar"></div>
-        <!-- actions -->
-        <div class="top-act">
-            <a href="/log-in" class="btn btn--text prevent-select">Đăng nhập</a>
-            <a
-                href="/register"
-                class="btn btn--primary top-act__sign-up prevent-select"
-            >Đăng ký</a>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
 </div>
+
+<script>
+    $(document).ready(function () { $("#Id_Exit").on("click", function (e) {
+    localStorage.removeItem("Key"); $.ajax({ url: "/exit", type: "POST",
+    dataType: "json", contentType:
+    "application/x-www-form-urlencoded;charset=UTF-8", data: null, success:
+    function (data, textStatus, jqXHR) { if (data.Mess.length > 0) { } else {
+    top.location.href = "/log-in"; } }, error: function (xhr, status, error) {},
+    }); setTimeout(() => { window.location = "/"; }, 2000); }); });
+</script>

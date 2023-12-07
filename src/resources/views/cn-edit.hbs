@@ -1,0 +1,55 @@
+<form>
+    <h3>Chỉnh sửa chi nhánh</h3>
+    {{#each Items}}
+        <div class="form-floating mb-3">
+            <input
+                type="text"
+                class="form-control"
+                id="Br_Name"
+                name="Br_Name"
+                value="{{this.Br_Name}}"
+            />
+            <label for="Br_Name">Tên chi nhánh</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input
+                type="text"
+                class="form-control"
+                id="Br_Adress"
+                name="Br_Adress"
+                value="{{this.Br_Adress}}"
+            />
+            <label for="Br_Adress">Địa chỉ</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input
+                type="text"
+                class="form-control"
+                id="Br_Phone"
+                name="Br_Phone"
+                value="{{this.Br_Phone}}"
+            />
+            <label for="Br_Phone">Điện thoại</label>
+            <div id="email_err" class="form-text" style="color: red;"> </div>
+        </div>
+    {{/each}}
+    <button id="btn_EditBranch" class="btn btn-primary"> Lưu </button>
+</form>
+<script>
+
+    $(document).ready(function () { $("#btn_EditBranch").on("click", function
+    (e) { e.preventDefault(); $("#email_err").html(``);
+    $("#email_done").html(``); if ($("#Br_Name").val().trim().length === 0) {
+    $("#email_err").html(`Phải nhập tên chi nhánh`); return; } if
+    ($("#Br_Adress").val().length === 0) { $("#email_err").html(`Phải nhập địa
+    chỉ chi nhánh`); return; } if ($("#Br_Phone").val().length === 0) {
+    $("#email_err").html(`Phải nhập số điện thoại`); return; } var url =
+    location.href; var settings = { data: $("form").serialize(), method: "POST",
+    statusCode: {}, success: function (data, textStatus, jqXHR) { if
+    (data.Mess.length > 0) { $("#email_err").html(data.Mess); } else {
+    window.location.href = "/cn"; } }, error: function (jqXHR, textStatus,
+    errorThrown) { $("#email_err").html(jqXHR.responseText); }, }; $.ajax(url,
+    settings); }); });
+
+</script>

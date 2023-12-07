@@ -1,7 +1,65 @@
-<div class="Order-container">
+<form class="Order-container">
     <section class="Order--prod__info">
-        <h1 class="prod-info__heading">Danh sách đơn hàng</h1>
+        <h4 class="mt-3">Tìm kiếm</h4>
+        <div class="row g-5">
+            <div class="col-lg-3">
 
+                <div class="form-floating">
+                    <select
+                        class="form-select"
+                        id="Select_Status"
+                        name="Select_Status"
+                        aria-label="Floating label select example"
+                    >
+                        <option value="0" selected>Chờ xử lý</option>
+                        <option value="1">Đang giao</option>
+                        <option value="2">Hoàng thành</option>
+                        <option value="3">Đã hủy</option>
+                    </select>
+                    <label for="floatingSelectGrid">Trạng thái đơn hàng</label>
+                </div>
+
+            </div>
+            <div class="col-lg-6">
+
+                <div class="row g-2">
+                    <div class="col-lg">
+                        <div class="form-floating">
+                            <select
+                                class="form-select"
+                                id="Select_Seach"
+                                name="Select_Seach"
+                                aria-label="Floating label select example"
+                            >
+                                <option value="0" selected>Số đơn hàng</option>
+                                <option value="1">Điện thoại người nhận</option>
+                                <option value="2">Điện thoại người giao</option>
+                            </select>
+                            <label for="floatingSelectGrid">Tìm theo</label>
+                        </div>
+                    </div>
+                    <div class="col-lg">
+                        <div class="form-floating">
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="input_seach"
+                                name="input_seach"
+                            />
+                            <label id="label_desc" for="input_seach">Đơn hàng</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <button type="submit" class="mt-2 btn btn-primary">
+                    Tìm kiếm</button>
+            </div>
+
+        </div>
+        <h4 class="mt-3">Danh sách đơn hàng</h4>
         <table id="Order_table" class="table table-hover">
             <thead>
                 <tr>
@@ -10,20 +68,27 @@
                     <th scope="col">Giá trị</th>
                     <th scope="col">Trạng thái</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 {{#each Items}}
                     <tr>
                         <td>{{this.Tran_Num}}</td>
-                        <td>{{this.Tran_Date}}</td>
+                        <td>{{this.Tran_Dates}}</td>
                         <td>{{this.Amt}}</td>
                         <td>{{this.Status}}</td>
                         <td><img
                                 src="{{this.Order_Img}}"
                                 alt=""
-                                class="cart_order--status"
+                                style="height: 24px; width: 24px;"
                             /></td>
+                        <td>
+                            <a href="/orderAll/{{this.Tran_Num}}/view">
+                                <button type="button" class="btn btn-link">Chi
+                                    tiết</button>
+                            </a>
+                        </td>
                     </tr>
                 {{/each}}
             </tbody>
@@ -31,4 +96,13 @@
 
     </section>
 
-</div>
+</form>
+
+<script>
+    $(document).ready(function () { $('#Select_Seach').on('change', function ()
+    { var selectVal = $("#Select_Seach option:selected").val(); if
+    (selectVal==="0") { $('#label_desc').text(`Đơn hàng`); } else if
+    (selectVal==="1") { $('#label_desc').text(`Điện thoại người nhận`) ; } else
+    {$('#label_desc').text(`Điện thoại người giao`)} }); });
+
+</script>

@@ -15,7 +15,7 @@ const generatePassword = () => {
 class ResetpasswordController {
     // Get /news
     show(req, res, next) {
-        res.render("reset-password");
+        res.render("reset-password", { layout: "main-logined" });
     }
 
     async resetPassword(req, res, next) {

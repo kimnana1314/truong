@@ -75,31 +75,6 @@ $(document).ready(function () {
             $.ajax(url, settings);
         }
     });
-    // reset password
-
-    $("#btn_Rest_password").on("click", function (e) {
-        e.preventDefault();
-
-        var url = "/reset-password";
-        alert($("form").serialize());
-        var settings = {
-            data: $("form").serialize(),
-            method: "POST",
-            statusCode: {},
-            success: function (data, textStatus, jqXHR) {
-                if (data.Mess.length == 0) {
-                    createToast("success", "Đặt lại mật khẩu thành công!");
-                } else {
-                    createToast("warning", data.Mess);
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                createToast("error", xhr.responseText);
-            },
-        };
-
-        $.ajax(url, settings);
-    });
 
     $("#btnAcitive").on("click", function (e) {
         e.preventDefault();
@@ -122,51 +97,6 @@ $(document).ready(function () {
         });
     });
 
-    $("#btnLogin").on("click", function (e) {
-        e.preventDefault();
-        $.ajax({
-            url: "/log-in",
-            type: "POST",
-            dataType: "json",
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            data: $("form").serialize(),
-
-            success: function (data, textStatus, jqXHR) {
-                if (data.Mess.length == 0 && data.Pass) {
-                    var mes =
-                        "{ Id:" +
-                        "'" +
-                        data.Id +
-                        "'" +
-                        ",Ref:" +
-                        "'" +
-                        data.Ref +
-                        "'" +
-                        "}";
-                    localStorage.setItem("Key", mes);
-                    var settings = {
-                        url: "/",
-                        method: "GET",
-
-                        timeout: 0,
-                        headers: {
-                            Id: data.Id,
-                            token: "",
-                        },
-                    };
-
-                    $.ajax(settings).done(function (response) {
-                        window.location.href = "/";
-                    });
-                } else {
-                    $("#output").html("Email và tên đăng nhập không hợp lệ");
-                }
-            },
-            error: function (xhr, status, error) {
-                $("#output").html(xhr.responseText);
-            },
-        });
-    });
     // sang pham
 
     $("#btn_love").on("click", function (e) {
@@ -532,68 +462,8 @@ $(document).ready(function () {
             },
         });
     });
-    // Thay đổi mật khẩu
-    $("#btn_profile_change_password").on("click", function (e) {
-        e.preventDefault();
-        if ($("input[name='User_Password']").val().length < 6) {
-            createToast("warning", "Mật khẩu phải ít nhất 6 ký tự");
-        } else {
-            if (
-                $("input[name='User_Password']").val() !=
-                $("input[name='User_PasswordConfirm']").val()
-            ) {
-                createToast("warning", "Mật khẩu xác nhận không đúng");
-            } else {
-                $.ajax({
-                    url: "/changepassword",
-                    type: "POST",
-                    dataType: "json",
-                    contentType:
-                        "application/x-www-form-urlencoded; charset=UTF-8",
-                    data: $("form").serialize(),
-                    success: function (data, textStatus, jqXHR) {
-                        if (data.Mess.length == 0) {
-                            createToast(
-                                "success",
-                                "Thay đổi mật khẩu thành công!"
-                            );
-                        } else {
-                            createToast("warning", data.Mess);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        createToast("error", xhr.responseText);
-                    },
-                });
-            }
-        }
-    });
 
     // Id_Exit
-    $("#Id_Exit").on("click", function (e) {
-        localStorage.removeItem("Key");
-        localStorage.removeItem("theme");
-        $.ajax({
-            url: "/exit",
-            type: "POST",
-            dataType: "json",
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            data: null,
-            success: function (data, textStatus, jqXHR) {
-                if (data.Mess.length > 0) {
-                    $("#output").html(data.Mess);
-                } else {
-                    top.location.href = "/log-in";
-                }
-            },
-            error: function (xhr, status, error) {
-                $("#output").html(xhr.responseText);
-            },
-        });
-        setTimeout(() => {
-            window.location = "/";
-        }, 2000);
-    });
 
     // Order
 
@@ -914,12 +784,12 @@ $(document).ready(function () {
             createToast("warning", "Phải nhập tên người nhận");
             return;
         }
-        if ($("#Adress").val().trim().length == 0) {
-            createToast("warning", "Phải nhập địa chỉ");
+        if ($("#Adress").val().trim().length < 4) {
+            createToast("warning", "Địa chỉ không hợp lệ");
             return;
         }
-        if ($("#Phone").val().trim().length == 0) {
-            createToast("warning", "Phải nhập điện thoại");
+        if ($("#Phone").val().trim().length < 8) {
+            createToast("warning", "Số điện thoại không hợp lệ");
             return;
         }
 

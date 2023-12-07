@@ -1,0 +1,225 @@
+<form class="Order-container">
+
+    <h4 class="mt-3">Người nhận</h4>
+    {{#each Trans}}
+        <div class="row g-3">
+            <div class="col-lg-3">
+
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="Ascendant"
+                        name="Ascendant"
+                        value="{{this.Ascendant}}"
+                    />
+                    <label for="Ascendant">Tên người gửi</label>
+                </div>
+
+            </div>
+            <div class="col-lg-6">
+
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="Adress"
+                        name="Adress"
+                        value="{{this.Adress}}"
+                    />
+                    <label id="label_desc" for="Adress">Địa chỉ</label>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="Phone"
+                        name="Phone"
+                        value="{{this.Phone}}"
+                    />
+                    <label for="Phone">Điện thoại</label>
+                </div>
+            </div>
+
+        </div>
+        <h4 class="mt-3">Người giao</h4>
+        <div class="row g-2">
+            <div class="col-lg-8">
+
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="Deliver"
+                        name="Deliver"
+                        value="{{this.Deliver}}"
+                    />
+                    <label for="Deliver">Tên người giao</label>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="Phone_Del"
+                        name="Phone_Del"
+                        value="{{this.Phone_Del}}"
+                    />
+                    <label id="label_desc" for="Phone_Del">Điện thoại</label>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row g-1 mt-2">
+            <div class="col">
+
+                <div class="form-floating">
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="Remark"
+                        name="Remark"
+                        value="{{this.Remark}}"
+                    />
+                    <label for="Remark">Ghi chú đơn hàng</label>
+                </div>
+
+            </div>
+
+        </div>
+    {{/each}}
+    <h4 class="mt-3">Danh sách đơn hàng</h4>
+    <table id="Order_table" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">TT</th>
+                <th scope="col">Mã</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Đơn giá</th>
+                <th scope="col">Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each Items}}
+                <tr>
+                    <th scope="row">{{this.Idx}}</th>
+                    <td>{{this.Item_Id}}</td>
+                    <td>{{this.Item_Name}}</td>
+                    <td>{{this.Qty}}</td>
+                    <td>{{this.Prices}}</td>
+                    <td>{{this.Amt}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <div class="input-group">
+        <div class="input-group-text" style="font-weight: 600;">Tổng đơn hàng:</div>
+        {{#each Trans}}
+            <input
+                type="text"
+                class="form-control"
+                id="Amt_DH"
+                name="Amt_DH"
+                value="{{this.Amt_DH}}"
+                disabled
+                style="
+text-align: right;
+font-weight: 600;"
+            />
+        {{/each}}
+    </div>
+    <div id="email_err" class="form-text" style="color: red;"></div>
+    <div class="mt-2">
+        <button id="btn_delivery" type="button" class="btn btn-primary">Giao
+            hàng</button>
+        <button id="btn_success" type="button" class="btn btn-success">Hoàng
+            thành</button>
+        <button
+            id="btn_Delete"
+            type="button"
+            class="btn btn-danger"
+        >Xóa</button>
+        <button id="btn_Recover" type="button" class="btn btn-warning">Phục hồi</button>
+    </div>
+
+    {{#each Trans}}
+        <input
+            type="text"
+            class="form-control"
+            id="Status"
+            name="Status"
+            value="{{this.Status}}"
+            hidden
+            readonly
+        />
+    {{/each}}
+</form>
+
+<script>
+    $(document).ready(function () { let Status = $("#Status").val(); if (Status
+    === "0") { $("#btn_success").attr("hidden", true);
+    $("#btn_Recover").attr("hidden", true); } else if (Status === "1") {
+    $("#btn_delivery").attr("hidden", true); $("#btn_Recover").attr("hidden",
+    true); } else if (Status === "2") { $("#btn_success").attr("hidden", true);
+    $("#btn_Recover").attr("hidden", true); $("#btn_delivery").attr("hidden",
+    true); } else { $("#btn_delivery").attr("hidden", true);
+    $("#btn_success").attr("hidden", true); $("#btn_Delete").attr("hidden",
+    true); } $("#btn_delivery").on("click", function (e) { e.preventDefault();
+    $("#email_err").html(``); if ($("#Ascendant").val().trim().length === 0) {
+    $("#email_err").html(`Phải nhập tên người nhận`); return; } if
+    ($("#Adress").val().length === 0) { $("#email_err").html(`Phải nhập địa chỉ
+    người nhận`); return; } if ($("#Phone").val().length === 0) {
+    $("#email_err").html(`Phải nhập số điện thoại người nhận`); return; } if
+    ($("#Deliver").val().length === 0) { $("#email_err").html(`Phải nhập tên
+    người giao`); return; } if ($("#Phone_Del").val().length === 0) {
+    $("#email_err").html(`Phải nhập số điện thoại người giao`); return; } let
+    idx = location.href.lastIndexOf("/"); let url = location.href.substring(0,
+    idx) + "/delivery"; let settings = { data: $("form").serialize(), method:
+    "PUT", statusCode: {}, success: function (data, textStatus, jqXHR) { if
+    (data.Mess.length > 0) { $("#email_err").html(data.Mess); } else {
+    window.location.href = "/OrderAll"; } }, error: function (jqXHR, textStatus,
+    errorThrown) { $("#email_err").html(jqXHR.responseText); }, }; $.ajax(url,
+    settings); }); $("#btn_success").on("click", function (e) {
+    e.preventDefault(); $("#email_err").html(``); if
+    ($("#Ascendant").val().trim().length === 0) { $("#email_err").html(`Phải
+    nhập tên người nhận`); return; } if ($("#Adress").val().length === 0) {
+    $("#email_err").html(`Phải nhập địa chỉ người nhận`); return; } if
+    ($("#Phone").val().length === 0) { $("#email_err").html(`Phải nhập số điện
+    thoại người nhận`); return; } if ($("#Deliver").val().length === 0) {
+    $("#email_err").html(`Phải nhập tên người giao`); return; } if
+    ($("#Phone_Del").val().length === 0) { $("#email_err").html(`Phải nhập số
+    điện thoại người giao`); return; } let idx = location.href.lastIndexOf("/");
+    let url = location.href.substring(0, idx) + "/success"; let settings = {
+    data: $("form").serialize(), method: "PUT", statusCode: {}, success:
+    function (data, textStatus, jqXHR) { if (data.Mess.length > 0) {
+    $("#email_err").html(data.Mess); } else { window.location.href =
+    "/OrderAll"; } }, error: function (jqXHR, textStatus, errorThrown) {
+    $("#email_err").html(jqXHR.responseText); }, }; $.ajax(url, settings); });
+    $("#btn_Delete").on("click", function (e) { e.preventDefault();
+    $("#email_err").html(``); let idx = location.href.lastIndexOf("/"); let url
+    = location.href.substring(0, idx) + "/Delete"; let settings = { data:
+    $("form").serialize(), method: "PUT", statusCode: {}, success: function
+    (data, textStatus, jqXHR) { if (data.Mess.length > 0) {
+    $("#email_err").html(data.Mess); } else { window.location.href =
+    "/OrderAll"; } }, error: function (jqXHR, textStatus, errorThrown) {
+    $("#email_err").html(jqXHR.responseText); }, }; $.ajax(url, settings); });
+    $("#btn_Recover").on("click", function (e) { e.preventDefault();
+    $("#email_err").html(``); let idx = location.href.lastIndexOf("/"); let url
+    = location.href.substring(0, idx) + "/Recover"; let settings = { data:
+    $("form").serialize(), method: "PUT", statusCode: {}, success: function
+    (data, textStatus, jqXHR) { if (data.Mess.length > 0) {
+    $("#email_err").html(data.Mess); } else { window.location.href =
+    "/OrderAll"; } }, error: function (jqXHR, textStatus, errorThrown) {
+    $("#email_err").html(jqXHR.responseText); }, }; $.ajax(url, settings); });
+    });
+
+</script>

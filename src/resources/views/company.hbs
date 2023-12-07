@@ -1,0 +1,54 @@
+<h3>Thông tin liên hệ</h3>
+<form>
+    {{#each company}}
+        <div class="mb-3">
+            <label for="Titel" class="form-label">Mô tả</label>
+            <textarea class="form-control" id="Titel" name="Titel" rows="3">
+                {{this.Titel}}
+            </textarea>
+        </div>
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email</label>
+            <input
+                type="email"
+                class="form-control"
+                id="Email"
+                name="Email"
+                value="{{this.Email}}"
+            />
+        </div>
+        <div class="mb-3">
+            <label for="Hotline" class="form-label">Hotline</label>
+            <input
+                type="text"
+                class="form-control"
+                id="Hotline"
+                name="Hotline"
+                value="{{this.Hotline}}"
+            />
+        </div>
+
+        <div class="mb-3">
+            <label for="Address" class="form-label">Địa chỉ</label>
+            <input
+                type="text"
+                class="form-control"
+                id="Address"
+                name="Address"
+                value="{{this.Address}}"
+            />
+        </div>
+    {{/each}}
+    <button id="btn_company" class="btn btn-primary">Lưu thay đổi</button>
+
+</form>
+
+<script>
+    $(document).ready(function () { $("#btn_company").on("click", function (e) {
+    e.preventDefault(); var url = "/company"; var settings = { data:
+    $("form").serialize(), method: "POST", statusCode: {}, success: function
+    (data, textStatus, jqXHR) { if (data.Mess.length > 0) { } else {
+    window.location.href = "/company"; } }, error: function (jqXHR, textStatus,
+    errorThrown) {}, }; $.ajax(url, settings); }); });
+
+</script>
