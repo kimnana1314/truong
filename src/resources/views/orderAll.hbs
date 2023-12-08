@@ -54,7 +54,11 @@
             </div>
 
             <div class="col-lg-3">
-                <button type="submit" class="mt-2 btn btn-primary">
+                <button
+                    type="submit"
+                    id="btn_seachAll"
+                    class="mt-2 btn btn-primary"
+                >
                     Tìm kiếm</button>
             </div>
 
@@ -99,10 +103,18 @@
 </form>
 
 <script>
-    $(document).ready(function () { $('#Select_Seach').on('change', function ()
-    { var selectVal = $("#Select_Seach option:selected").val(); if
-    (selectVal==="0") { $('#label_desc').text(`Đơn hàng`); } else if
-    (selectVal==="1") { $('#label_desc').text(`Điện thoại người nhận`) ; } else
-    {$('#label_desc').text(`Điện thoại người giao`)} }); });
+    $(document).ready(function () { if (localStorage.getItem("Order_Status")) {
+    $("#Select_Status").val(localStorage.getItem("Order_Status")); } else {
+    $("#Select_Status").val("0"); } if (localStorage.getItem("Order_Seach")) {
+    $("#Select_Seach").val(localStorage.getItem("Order_Seach")); } else {
+    $("#Select_Seach").val("0"); } $("#Select_Status").on("change", function ()
+    { let selectVal = $("#Select_Status option:selected").val();
+    localStorage.setItem("Order_Status", selectVal); });
+    $("#Select_Seach").on("change", function () { let selectVal =
+    $("#Select_Seach option:selected").val();
+    localStorage.setItem("Order_Seach", selectVal); if (selectVal === "0") {
+    $("#label_desc").text(`Đơn hàng`); } else if (selectVal === "1") {
+    $("#label_desc").text(`Điện thoại người nhận`); } else {
+    $("#label_desc").text(`Điện thoại người giao`); } }); });
 
 </script>
