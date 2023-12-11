@@ -25,6 +25,9 @@ class OrderController {
 
     order(req, res, next) {
         let SQL_Json = JSON.stringify(req.body).replace(/\\/g, "");
+        console.log("--------------");
+        console.log(SQL_Json.substring(2, SQL_Json.length - 5));
+        console.log("--------------");
         db.PostOrder(SQL_Json.substring(2, SQL_Json.length - 5))
             .then((Items) => {
                 res.send(Items);

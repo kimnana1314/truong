@@ -3429,6 +3429,15 @@ footer {
   --grid-gutter-y: 10px;
 }
 
+.main__chat {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  right: 5px;
+  bottom: 50px;
+}
+
 .auth {
   min-height: 100vh;
   display: flex;
